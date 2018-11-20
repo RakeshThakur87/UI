@@ -1,0 +1,385 @@
+<div class="pre-loader" *ngIf="apiResponsesLoderFlag.length>0">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+<div id="content" class="capitalize card-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-edit"></i>Add Company/JobSite
+                    <div class="card-header-actions">
+                        <div class="row back-buttons">
+                            <div class="col-sm-12">
+                                <a routerLink="/master/project-detail" class="btn btn-block btn-info active" style="cursor: pointer;">
+                                    <i class="fa fa-backward"></i> Back to listing</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form #addForm="ngForm" (ngSubmit)="submit(addForm)" novalidate>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>Company Information</h2>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row margin-top-20px">
+                            <div class="col-md-4 form-group">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="appendedInput">Company Name</label>
+                                    <div class="controls">
+                                        <div class="input-group">
+                                            <input type="text" required #Name="ngModel" class="form-control" name="Name" [(ngModel)]="elements.Name">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="(addForm.submitted &&  Name.errors)">
+                                            <div *ngIf="Name.errors.required">
+                                                <sup class="validationerror"> required.</sup>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Company Code</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #Code="ngModel" class="form-control" name="Code" [(ngModel)]="elements.Code">
+                                <div *ngIf="(addForm.submitted &&  Code.errors)">
+                                    <div *ngIf="Code.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Company Address</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #CompanyAddress="ngModel" class="form-control" name="CompanyAddress" [(ngModel)]="elements.CompanyAddress">
+                                <div *ngIf="(addForm.submitted &&  CompanyAddress.errors)">
+                                    <div *ngIf="CompanyAddress.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>State</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #CompanyState="ngModel" name="CompanyState" [(ngModel)]="elements.CompanyState">
+                                    <option value="">Select State Name</option>
+                                    <option *ngFor="let listitem of stateListobj;" value="{{listitem.Id}}">{{listitem.Name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  CompanyState.errors)">
+                                    <div *ngIf="CompanyState.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>City</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #CompanyCity="ngModel" class="form-control" name="CompanyCity" [(ngModel)]="elements.CompanyCity">
+                                <div *ngIf="(addForm.submitted &&  CompanyCity.errors)">
+                                    <div *ngIf="CompanyCity.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Phone No</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #ContactNo="ngModel" class="form-control" name="ContactNo" [(ngModel)]="elements.ContactNo">
+                                <div *ngIf="(addForm.submitted &&  ContactNo.errors)">
+                                    <div *ngIf="ContactNo.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Email</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #Email="ngModel" class="form-control" name="Email" [(ngModel)]="elements.Email">
+                                <div *ngIf="(addForm.submitted &&  Email.errors)">
+                                    <div *ngIf="Email.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Zip Code</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #CompanyZipCode="ngModel" class="form-control" name="CompanyZipCode" [(ngModel)]="elements.CompanyZipCode">
+                                <div *ngIf="(addForm.submitted &&  CompanyZipCode.errors)">
+                                    <div *ngIf="CompanyZipCode.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>Contact Information</h2>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row margin-top-20px">
+                            <div class="form-group col-md-4">
+                                <label>First Name</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #FirstName="ngModel" class="form-control" name="FirstName" [(ngModel)]="elements.FirstName">
+                                <div *ngIf="(addForm.submitted &&  FirstName.errors)">
+                                    <div *ngIf="FirstName.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Last Name</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #LastName="ngModel" class="form-control" name="LastName" [(ngModel)]="elements.LastName">
+                                <div *ngIf="(addForm.submitted &&  LastName.errors)">
+                                    <div *ngIf="LastName.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Phone No</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #ContactPersonPhoneNo="ngModel" class="form-control" name="ContactPersonPhoneNo" [(ngModel)]="elements.ContactPersonPhoneNo">
+                                <div *ngIf="(addForm.submitted &&  ContactPersonPhoneNo.errors)">
+                                    <div *ngIf="ContactPersonPhoneNo.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Email</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #ContactPersonEmail="ngModel" class="form-control" name="ContactPersonEmail" [(ngModel)]="elements.ContactPersonEmail">
+                                <div *ngIf="(addForm.submitted &&  ContactPersonEmail.errors)">
+                                    <div *ngIf="ContactPersonEmail.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Address</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #ContactPersonAddress="ngModel" class="form-control" name="ContactPersonAddress" [(ngModel)]="elements.ContactPersonAddress">
+                                <div *ngIf="(addForm.submitted &&  ContactPersonAddress.errors)">
+                                    <div *ngIf="ContactPersonAddress.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>State</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #ContactPersonState_id="ngModel" name="ContactPersonState_id" [(ngModel)]="elements.ContactPersonState_id">
+                                    <option value="">Select State Name</option>
+                                    <option *ngFor="let listitem of stateListobj;" value="{{listitem.Id}}">{{listitem.Name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  ContactPersonState_id.errors)">
+                                    <div *ngIf="ContactPersonState_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>City</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #ContactPersonCity="ngModel" class="form-control" name="ContactPersonCity" [(ngModel)]="elements.ContactPersonCity">
+                                <div *ngIf="(addForm.submitted &&  ContactPersonCity.errors)">
+                                    <div *ngIf="ContactPersonCity.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Zip Code</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #ContactPersonZipCode="ngModel" class="form-control" name="ContactPersonZipCode" [(ngModel)]="elements.ContactPersonZipCode">
+                                <div *ngIf="(addForm.submitted &&  ContactPersonZipCode.errors)">
+                                    <div *ngIf="ContactPersonZipCode.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label>Password</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #password_hash="ngModel" class="form-control" name="password_hash" [(ngModel)]="elements.password_hash">
+                                <div *ngIf="(addForm.submitted &&  password_hash.errors)">
+                                    <div *ngIf="password_hash.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>Billing Information</h2>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row margin-top-20px">
+                            <div class="form-group col-md-4">
+                                <label>Contact Person</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #BillingContactPerson="ngModel" class="form-control" name="BillingContactPerson" [(ngModel)]="elements.BillingContactPerson">
+                                <div *ngIf="(addForm.submitted &&  BillingContactPerson.errors)">
+                                    <div *ngIf="BillingContactPerson.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Phone No</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #BillingPhone="ngModel" class="form-control" name="BillingPhone" [(ngModel)]="elements.BillingPhone">
+                                <div *ngIf="(addForm.submitted &&  BillingPhone.errors)">
+                                    <div *ngIf="BillingPhone.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Email</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #BillingEmail="ngModel" class="form-control" name="BillingEmail" [(ngModel)]="elements.BillingEmail">
+                                <div *ngIf="(addForm.submitted &&  BillingEmail.errors)">
+                                    <div *ngIf="BillingEmail.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Company Address</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #BillingAddress="ngModel" class="form-control" name="BillingAddress" [(ngModel)]="elements.BillingAddress">
+                                <div *ngIf="(addForm.submitted &&  BillingAddress.errors)">
+                                    <div *ngIf="BillingAddress.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>State</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #BillingState_id="ngModel" name="BillingState_id" [(ngModel)]="elements.BillingState_id">
+                                    <option value="">Select State Name</option>
+                                    <option *ngFor="let listitem of stateListobj;" value="{{listitem.Id}}">{{listitem.Name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  BillingState_id.errors)">
+                                    <div *ngIf="BillingState_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>City</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #BillingCity_Name="ngModel" class="form-control" name="BillingCity_Name" [(ngModel)]="elements.BillingCity_Name">
+                                <div *ngIf="(addForm.submitted &&  BillingCity_Name.errors)">
+                                    <div *ngIf="BillingCity_Name.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>Zip Code</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #BillingZipCode="ngModel" class="form-control" name="BillingZipCode" [(ngModel)]="elements.BillingZipCode">
+                                <div *ngIf="(addForm.submitted &&  BillingZipCode.errors)">
+                                    <div *ngIf="BillingZipCode.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label>GSTNO</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #GSTNO="ngModel" class="form-control" name="GSTNO" [(ngModel)]="elements.GSTNO">
+                                <div *ngIf="(addForm.submitted &&  GSTNO.errors)">
+                                    <div *ngIf="GSTNO.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>PANNo</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #PANNo="ngModel" class="form-control" name="PANNo" [(ngModel)]="elements.PANNo">
+                                <div *ngIf="(addForm.submitted &&  PANNo.errors)">
+                                    <div *ngIf="PANNo.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Office Type</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #OfficeTypeId="ngModel" name="OfficeTypeId" [(ngModel)]="elements.OfficeTypeId">
+                                    <option value="">Select Office Type</option>
+                                    <option *ngFor="let listitem of OfficeTypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  OfficeTypeId.errors)">
+                                    <div *ngIf="OfficeTypeId.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Business Type</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #BusinessTypeId="ngModel" name="BusinessTypeId" [(ngModel)]="elements.BusinessTypeId">
+                                    <option value="">Select Business Type</option>
+                                    <option *ngFor="let listitem of BusinesstypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  BusinessTypeId.errors)">
+                                    <div *ngIf="BusinessTypeId.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" class="row margin-top-20px margin-bottom-20px">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-2">
+                            <!-- <button class="btn btn-block btn-success" (ngSubmit)="onSubmit(supervisorForm)">
+                              <i class="fa fa-floppy-o"></i> Save
+                          </button> -->
+                            <button type="submit" class="btn btn-primary px-4">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+<style>
+    .manual-date-edit input {
+        width: 15px;
+        position: relative;
+        top: 17px;
+    }
+
+    .manual-date-edit label {
+        margin-left: 15px;
+    }
+
+    .back-buttons .btn {
+        padding: 10px 14px 10px 7px;
+    }
+</style>

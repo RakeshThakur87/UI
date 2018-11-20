@@ -1,0 +1,78 @@
+<nb-card>
+    <nb-card-header class="text-center">
+        <h4 class="title">Product Group</h4>
+        <small class="form-text sub-title">
+            Create New Product Group
+        </small>
+    </nb-card-header>
+    <nb-card-body>
+        <form *ngIf="!isSuccess; else successMessage" [ngClass]="{ 'form-submit': isSubmit}" (ngSubmit)="onSubmit()"
+            name="addnewitemForm" [formGroup]="addnewitemForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <nb-card formGroupName="dataInfo">
+                        <nb-card-header>Category Details</nb-card-header>
+                        <nb-card-body>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Category Name</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Group Name.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Group Name no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="GroupCode">Group Code</label>
+                                        <input type="text" formControlName="GroupCode" name="GroupCode" class="form-control"
+                                            id="GroupCode" placeholder="Last Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].GroupCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].GroupCode.dirty || addnewitemForm['controls'].dataInfo['controls'].GroupCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].GroupCode.errors.required">
+                                                Please enter a Group Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].GroupCode.errors.maxlength">
+                                                Please enter a Group Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="GroupCode">Group Code</label>
+                                        <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+                                            (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"
+                                            formControlName="skills">
+                                        </angular2-multiselect>
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].skills.invalid && (addnewitemForm['controls'].dataInfo['controls'].skills.dirty || addnewitemForm['controls'].dataInfo['controls'].skills.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].skills.errors.required">
+                                                Please enter a Group Code.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+        </form>
+        <ng-template #successMessage>
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            <a class="btn btn-info" routerLink="/auth/login">Log In</a>
+        </ng-template>
+    </nb-card-body>
+</nb-card>

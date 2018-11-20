@@ -1,0 +1,580 @@
+<div class="pre-loader" *ngIf="apiResponsesLoderFlag.length>0">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+<div id="content" class="capitalize">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-edit"></i>Product Order Bill Creation
+                    <div class="card-header-actions">
+                        <div class="row back-buttons">
+                            <div class="col-sm-12">
+                                <a routerLink="/bill/po-bill" class="btn btn-block btn-info active" style="cursor: pointer;">
+                                    <i class="fa fa-backward"></i> Back to listing</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form>
+                    <div class="row margin-top-20px">
+                        <div class="col-sm-6">
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Vendor Code
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{vendorDetails.CompanyCode}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Vendor Name
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+
+                                    <div class="custom-grid-input-label-inner">
+                                        {{vendorDetails.CompanyName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Address
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+
+                                    <div class="custom-grid-input-label-inner">
+                                        {{vendorDetails.CompanyAddress}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Postal Code
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+
+                                    <div class="custom-grid-input-label-inner">
+                                        {{vendorDetails.CompanyZipCode}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        State Code
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+
+                                    <div class="custom-grid-input-label-inner">
+                                        {{vendorDetails.CompanyStateName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        GSTIN
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-min-height custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        {{vendorDetails.GSTNO}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        PAN No.
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-min-height custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        {{vendorDetails.CompanyGSTNo}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        <!--Serial No.-->
+                                        PO No
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{vendorDetails.PONo}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        <!--Serial No.-->
+                                        Job/Contract No
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{vendorDetails.JobOrderNo}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        <!--Serial No.-->
+                                        PO Type
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{vendorDetails.POTypeName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        <!--Serial No.-->
+                                        Department
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{vendorDetails.ServiceTypeName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Date Of Invoice
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        <div class="col-sm-10" [hidden]="!productOrderBillCreation.dateType" style="padding-right: 0px;">
+                                            <div class="select">
+                                                <div class="custom-input">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10 transectionDateSystem" [hidden]="productOrderBillCreation.dateType"
+                                            style="padding-right: 0px;">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Datepicker"
+                                                    bsDatepicker [(ngModel)]="productOrderBillCreation.InvoiceDate" #dp="bsDatepicker"
+                                                    name="InvoiceDate" />
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                <!-- (bsValueChange)="onValueChange($event)" -->
+                                                <!-- <div>
+                                                            <button class="btn btn-block btn-secondary" type="button" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">
+                                                                <i class="cui-calendar icons"></i>
+                                                            </button>
+        
+                                                        </div> -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="row custom-grid">
+                                    <div class="col-sm-4 custom-grid-input-label-outer">
+                                        <div class="custom-grid-input-label-inner">
+                                            <!--Serial No.-->
+                                            Invoice No
+                                        </div>
+                                    </div>
+                                    <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                        <div class="custom-grid-input-label-inner">
+                                            {{vendorDetails.InvoiceNo}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Supervisor Name
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        <select class="form-control dropdown" name="SuppervisorId" [(ngModel)]="productOrderBillCreation.SuppervisorId">
+                                            <option value="">Select Supervisor Name</option>
+                                            <option *ngFor="let item of employeeList;" value="{{item.Id}}">{{item.FirstName}}{{item.LastName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row margin-top-20px custom-grid-title">
+                        <div class="col-sm-6">Details of Supplier : Receiver [Billed to]</div>
+                        <div class="col-sm-3 padding-right-zero">Details of Consignee [Shipped to]:</div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row custom-grid">
+                                <div class=" col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        Area
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        {{vendorDetails.BranchName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        Address
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        {{vendorDetails.BranchAddress}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        State
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        {{vendorDetails.BranchStateName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        Zip Code
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        {{vendorDetails.BranchZipCode}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        GST No
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-min-height">
+                                        {{vendorDetails.BranchGSTNo}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Name
+
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner name">
+                                        {{vendorDetails.ProjectName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Address
+
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner address">
+                                        {{vendorDetails.ProjectAddress}}
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        State
+
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner state">
+                                        {{vendorDetails.ProjectStateName}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Zip Code
+
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner stateCode">
+                                        {{vendorDetails.ProjectZipCode}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        GST No
+                                        <!--<sup style="color:red;">*</sup>-->
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{vendorDetails.ProjectZipCode}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <div class="row margin-top-20px">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="margin-bottom: 0px;">
+                                    <thead style="background:#f0f3f5;">
+                                        <tr>
+                                            <th style="width: 2%;">#</th>
+                                            <!-- <th style="width: 10%;">HSN Code </th> -->
+                                            <th style="width: 28%;">
+                                                Items Desc.
+                                                <sup style="color:red;">*</sup>
+                                            </th>
+                                            <th style="width: 10%;">
+                                                Qty.
+                                                <sup style="color:red;">*</sup>
+                                            </th>
+                                            <th style="width: 10%;">Amount</th>
+                                            <th style="width: 10%;">Invoiced</th>
+                                            <th style="width: 10%;">Balance</th>
+                                            <th style="width: 10%;">Invoice%</th>
+                                            <th style="width: 10%;">Inv Amount</th>
+                                            <th style="width: 5%;">CGST</th>
+                                            <th style="width: 5%;">SGST</th>
+                                            <th style="width: 5%;">IGST</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of itemRows; let itemIndex = index">
+                                            <td class="custom-grid-td">{{itemIndex+1}}</td>
+
+                                            <td style="text-align:left;" class="custom-grid-td">
+                                                <span style="text-align:left;">
+                                                    {{productOrderBillCreation.ProductNameArray[itemIndex]}}</span>
+                                                    <br/>
+                                                    <span style="text-align:left;font-size: 10px">
+                                                        {{productOrderBillCreation.ProductDescriptionArray[itemIndex]}}</span>
+                                            </td>
+
+                                            <td style="text-align:right;" class="custom-grid-td">
+                                                <span style="text-align:right;">
+                                                    {{productOrderBillCreation.qtyListArray[itemIndex]}}</span>
+                                            </td>
+
+                                            <td style="text-align:right;" class="custom-grid-td">
+                                                <span style="text-align:right;">
+                                                    {{productOrderBillCreation.valueperunitListArray[itemIndex]}}</span>
+                                            </td>
+
+                                            <td style="text-align:right;" class="custom-grid-td">
+                                                <span style="text-align:right;">
+                                                    {{productOrderBillCreation.InvoiceAmountListArray[itemIndex]}}</span>
+                                            </td>
+
+                                            <td style="text-align:right;" class="custom-grid-td">
+                                                <span style="text-align:right;">
+                                                    {{productOrderBillCreation.balanceAmountListArray[itemIndex]}}</span>
+                                            </td>
+
+                                            <td  class="custom-grid-td">
+                                                <input style="text-align:right;font-weight: bold;" number="true" type="float" name="discountlistarr{{itemIndex}}"
+                                                    (change)="onDiscountChange()" [(ngModel)]="productOrderBillCreation.discountlistarr[itemIndex]"
+                                                    class="form-control custom-grid-input">
+                                            </td>
+
+                                            <td style="text-align:right;" class="custom-grid-td">
+                                                <span style="text-align:right;">
+                                                    {{productOrderBillCreation.disInvoiceAmountListArray[itemIndex]}}</span>
+                                            </td>
+
+                                            <td style="text-align:right;" class="custom-grid-td">
+                                                <input number="true" type="float" name="cgstAmountListArray{{itemIndex}}"
+                                                    [disabled]="true"
+                                                    [(ngModel)]="productOrderBillCreation.cgstAmountListArray[itemIndex]"
+                                                    class="form-control custom-grid-input">
+                                            </td>
+
+                                            <td style="text-align:right;" class="custom-grid-td">
+                                                <input number="true" type="float" name="sgstAmountListArray{{itemIndex}}"
+                                                     [disabled]="true"
+                                                    [(ngModel)]="productOrderBillCreation.sgstAmountListArray[itemIndex]"
+                                                    class="form-control custom-grid-input">
+                                            </td>
+
+                                            <td style="text-align:right;"  class="custom-grid-td">
+                                                <input number="true" type="float" name="igstAmountListArray{{itemIndex}}"
+                                                    [disabled]="true"
+                                                    [(ngModel)]="productOrderBillCreation.igstAmountListArray[itemIndex]"
+                                                    class="form-control custom-grid-input">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:left;font-weight: bold;" class="custom-grid-td">Total</td>
+                                            <td style="text-align:center;font-weight: bold;" class="custom-grid-td">--</td>
+                                            <td style="text-align:right;font-weight: bold;" class="custom-grid-td">{{productOrderBillCreation.total_qty}}</td>
+                                            <td style="text-align:right;font-weight: bold;" class="custom-grid-td">{{productOrderBillCreation.total_value_unit}}</td>
+                                            <td style="text-align:right;font-weight: bold;" class="custom-grid-td">{{productOrderBillCreation.total_invoice_diff_amount}}</td>
+                                            <td style="text-align:right;font-weight: bold;" class="custom-grid-td">{{productOrderBillCreation.total_balance_amount}}</td>
+                                            <td style="text-align:right;font-weight: bold;" class="custom-grid-td">{{productOrderBillCreation.invoice_per}}</td>
+                                            <td style="text-align:right;font-weight: bold;" class="custom-grid-td">
+                                                {{productOrderBillCreation.total_invoice_amount}}
+                                            </td>
+                                            <td style="text-align:right;font-weight: bold;" class="custom-grid-td">
+                                                {{productOrderBillCreation.totalcgst}}
+                                            </td>
+                                            <td style="text-align:right;font-weight: bold;" class="custom-grid-td">
+                                                {{productOrderBillCreation.totalsgst}}
+                                            </td>
+                                            <td style="text-align:right;font-weight: bold;">
+                                                {{productOrderBillCreation.totaligst}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row margin-top-20px">
+                        <div class="col-sm-4" style="width:30%;">
+                            <span style="font-weight: bold;"> Total Amount (In Figure) : </span>
+                            <i class="fa fa-inr"></i>{{productOrderBillCreation.taxableAmount}}
+                        </div>
+                        <div class="col-sm-8" style="width:70%;">
+                            <span style="font-weight: bold;"> Total Amount (In Words) : </span>
+                            <span class="capitalize">{{ total_amount }}</span>
+                        </div>
+                    </div>
+                    <!-- <div class="row margin-top-20px">
+                        <div class="col-sm-2" style="width:145px;">
+                            <label>Vehicle Number</label>
+                            <div class="">
+                                <input type="text" placeholder="UP 82 Y 0001" [(ngModel)]="productOrderBillCreation.vehicle_number" name="vehicleNumber"
+                                    class="form-control" style="text-transform: uppercase;">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label> Bill Amt. Subject To Reverse Charges</label>
+                            <div class="select">
+                                <select class="form-control drop-down" name="isBillSubjectToReverseCharges" [(ngModel)]="productOrderBillCreation.is_bill_subject_to_reverse_charges">
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3" style="width: 301px;">
+                            <div style="width : 127px; float: left;padding-right: 13px;">
+                                <label>Reference Prefix</label>
+                                <select style="padding-right: 6px;" class="form-control drop-down" name="branchInvoiceReferencePrefix" [(ngModel)]="productOrderBillCreation.branch_invoice_reference_prefix">
+                                    <option value="">Select Prefix</option>
+                                    <option *ngFor="let pre of branchDetails.branch_invoice_reference_prefix_list;" value="{{pre.branch_invoice_reference_prefix_uuid}}">{{pre.branch_invoice_reference_prefix}}</option>
+                                </select>
+                            </div>
+                            <div style="width : 125px; float: left; padding-right: 0px;">
+                                <label>Reference Number</label>
+                                <input type="text" [(ngModel)]="productOrderBillCreation.reference_number" name="reference_number" class="form-control" style="text-transform: uppercase;">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="row" class="row margin-top-20px margin-bottom-20px">
+
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-2">
+
+                            <a routerLink="{{invoiceListingLink}}" class="btn btn-block btn-danger">
+                                <i class="fa fa-arrows-alt"></i> Cancel
+                            </a>
+
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-block btn-success" type="submit" (click)="onSubmit()">
+                                <i class="fa fa-floppy-o"></i> Save &amp; New
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row margin-top-20px"></div>
+
+                </form>
+
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+
+
+
+
+
+<style>
+    .manual-date-edit input {
+        width: 15px;
+        position: relative;
+        top: 17px;
+    }
+
+
+
+    .manual-date-edit label {
+        margin-left: 15px;
+    }
+
+    .back-buttons .btn {
+        padding: 10px 14px 10px 7px;
+    }
+</style>

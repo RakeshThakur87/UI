@@ -1,0 +1,404 @@
+<div class="pre-loader" *ngIf="apiResponsesLoderFlag.length>0">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+<div id="content" class="capitalize card-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-edit"></i>Add Project/JobSite
+                    <div class="card-header-actions">
+                        <div class="row back-buttons">
+                            <div class="col-sm-12">
+                                <a routerLink="/master/project-detail" class="btn btn-block btn-info active" style="cursor: pointer;">
+                                    <i class="fa fa-backward"></i> Back to listing</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form #addForm="ngForm" (ngSubmit)="submit(addForm)" novalidate>
+                    <div class="col-sm-12">
+                        <div class="row margin-top-20px">
+                            <div class="col-md-4 form-group">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="appendedInput">Name</label>
+                                    <div class="controls">
+                                        <div class="input-group">
+
+                                            <input type="text" required #ProjectName="ngModel" class="form-control"
+                                                name="ProjectName" [(ngModel)]="elements.ProjectName">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="(addForm.submitted &&  ProjectName.errors)">
+                                            <div *ngIf="ProjectName.errors.required">
+                                                <sup class="validationerror"> required.</sup>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <label>Project Name</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #ProjectName="ngModel" class="form-control" name="ProjectName" [(ngModel)]="elements.ProjectName">
+                                <div *ngIf="(addForm.submitted &&  ProjectName.errors)">
+                                    <div *ngIf="ProjectName.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="appendedInput">SKU</label>
+                                    <div class="controls">
+                                        <div class="input-group">
+
+                                            <input type="text" required #product_item_name="ngModel" class="form-control"
+                                                name="product_item_name" [(ngModel)]="elements.product_item_name">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="(addForm.submitted &&  product_item_name.errors)">
+                                            <div *ngIf="product_item_name.errors.required">
+                                                <sup class="validationerror"> required.</sup>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>HSN code</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #product_item_code="ngModel" class="form-control" name="product_item_code"
+                                    [(ngModel)]="elements.product_item_code">
+                                <div *ngIf="(addForm.submitted &&  product_item_code.errors)">
+                                    <div *ngIf="product_item_code.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Category</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #product_dicount="ngModel" class="form-control" name="product_dicount"
+                                    [(ngModel)]="elements.product_dicount">
+                                <div *ngIf="(addForm.submitted &&  product_dicount.errors)">
+                                    <div *ngIf="product_dicount.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 form-group">
+                                <label>Initial quantity on hand*
+                                </label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #product_gst_tax="ngModel" class="form-control" name="product_gst_tax"
+                                    [(ngModel)]="elements.product_gst_tax">
+                                <div *ngIf="(addForm.submitted &&  product_gst_tax.errors)">
+                                    <div *ngIf="product_gst_tax.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Measuring Unit</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #product_uom_id="ngModel" name="product_uom_id"
+                                    [(ngModel)]="elements.product_uom_id">
+                                    <option value="">Select Uom</option>
+                                    <option *ngFor="let listitem of UomListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  product_uom_id.errors)">
+                                    <div *ngIf="product_uom_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>As of date*</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #product_gst_tax="ngModel" class="form-control" name="product_gst_tax"
+                                    [(ngModel)]="elements.product_gst_tax">
+                                <div *ngIf="(addForm.submitted &&  product_type.errors)">
+                                    <div *ngIf="product_type.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Low stock alert</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #product_gst_tax="ngModel" class="form-control" name="product_gst_tax"
+                                    [(ngModel)]="elements.product_gst_tax">
+                                <div *ngIf="(addForm.submitted &&  product_type.errors)">
+                                    <div *ngIf="product_type.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Inventory asset account</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #product_gst_tax="ngModel" class="form-control" name="product_gst_tax"
+                                    [(ngModel)]="elements.product_gst_tax">
+                                <div *ngIf="(addForm.submitted &&  product_type.errors)">
+                                    <div *ngIf="product_type.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-4">
+                                <label>Purchase Ledger</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #purchase_ledger_id="ngModel" name="purchase_ledger_id"
+                                    [(ngModel)]="elements.purchase_ledger_id">
+                                    <option value="">Select Purchase Ledger </option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  purchase_ledger_id.errors)">
+                                    <div *ngIf="purchase_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-4">
+                                <label>Sales information</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #purchase_ledger_id="ngModel" name="purchase_ledger_id"
+                                    [(ngModel)]="elements.purchase_ledger_id">
+                                    <option value="">Select Purchase Ledger </option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  purchase_ledger_id.errors)">
+                                    <div *ngIf="purchase_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Sales price/rate</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #purchase_ledger_id="ngModel" name="purchase_ledger_id"
+                                    [(ngModel)]="elements.purchase_ledger_id">
+                                    <option value="">Select Purchase Ledger </option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  purchase_ledger_id.errors)">
+                                    <div *ngIf="purchase_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Income account</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #sale_ledger_id="ngModel" name="sale_ledger_id"
+                                    [(ngModel)]="elements.sale_ledger_id">
+                                    <option value="">Select Product Type</option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  sale_ledger_id.errors)">
+                                    <div *ngIf="sale_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Inclusive of tax</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #purchase_ledger_id="ngModel" name="purchase_ledger_id"
+                                    [(ngModel)]="elements.purchase_ledger_id">
+                                    <option value="">Select Purchase Ledger </option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  purchase_ledger_id.errors)">
+                                    <div *ngIf="purchase_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Tax</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #purchase_ledger_id="ngModel" name="purchase_ledger_id"
+                                    [(ngModel)]="elements.purchase_ledger_id">
+                                    <option value="">Select Purchase Ledger </option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  purchase_ledger_id.errors)">
+                                    <div *ngIf="purchase_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Purchasing information</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #purchase_ledger_id="ngModel" name="purchase_ledger_id"
+                                    [(ngModel)]="elements.purchase_ledger_id">
+                                    <option value="">Select Purchase Ledger </option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  purchase_ledger_id.errors)">
+                                    <div *ngIf="purchase_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Cost</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #purchase_ledger_id="ngModel" name="purchase_ledger_id"
+                                    [(ngModel)]="elements.purchase_ledger_id">
+                                    <option value="">Select Purchase Ledger </option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  purchase_ledger_id.errors)">
+                                    <div *ngIf="purchase_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>
+                                    Expense account</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #purchase_ledger_id="ngModel" name="purchase_ledger_id"
+                                    [(ngModel)]="elements.purchase_ledger_id">
+                                    <option value="">Select Purchase Ledger </option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  purchase_ledger_id.errors)">
+                                    <div *ngIf="purchase_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>
+                                    Expense account</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #purchase_ledger_id="ngModel" name="purchase_ledger_id"
+                                    [(ngModel)]="elements.purchase_ledger_id">
+                                    <option value="">Select Purchase Ledger </option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  purchase_ledger_id.errors)">
+                                    <div *ngIf="purchase_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>
+                                    Inclusive of purchase tax</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #purchase_ledger_id="ngModel" name="purchase_ledger_id"
+                                    [(ngModel)]="elements.purchase_ledger_id">
+                                    <option value="">Select Purchase Ledger </option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  purchase_ledger_id.errors)">
+                                    <div *ngIf="purchase_ledger_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Purchase tax</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #product_type="ngModel" name="product_type"
+                                    [(ngModel)]="elements.product_type">
+                                    <option value="">Select Product Type</option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  product_uom_id.errors)">
+                                    <div *ngIf="product_uom_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label>Reverse charge %</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #product_type="ngModel" name="product_type"
+                                    [(ngModel)]="elements.product_type">
+                                    <option value="">Select Product Type</option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  product_uom_id.errors)">
+                                    <div *ngIf="product_uom_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-4 form-group">
+                                <label>Product Group</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #product_group_id="ngModel" name="product_group_id"
+                                    [(ngModel)]="elements.product_group_id">
+                                    <option value="">Select Product group</option>
+                                    <option *ngFor="let listitem of producttypeListobj;" value="{{listitem.id}}">{{listitem.name}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  product_group_id.errors)">
+                                    <div *ngIf="product_group_id.errors.required">
+                                        <sup class="validationerror"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-12" class="row margin-top-20px margin-bottom-20px">
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-2">
+                            <!-- <button class="btn btn-block btn-success" (ngSubmit)="onSubmit(supervisorForm)">
+                                <i class="fa fa-floppy-o"></i> Save
+                            </button> -->
+                            <button type="submit" class="btn btn-primary px-4">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+<style>
+    .manual-date-edit input {
+        width: 15px;
+        position: relative;
+        top: 17px;
+    }
+
+    .manual-date-edit label {
+        margin-left: 15px;
+    }
+
+    .back-buttons .btn {
+        padding: 10px 14px 10px 7px;
+    }
+</style>

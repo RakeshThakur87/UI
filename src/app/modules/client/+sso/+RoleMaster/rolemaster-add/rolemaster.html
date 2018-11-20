@@ -1,0 +1,78 @@
+<div class="pre-loader" *ngIf="apiResponsesLoderFlag.length>0">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+<div id="content" class="capitalize card-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-edit"></i> Add New Role Master
+                    <div class="card-header-actions">
+                        <div class="row back-buttons">
+                            <div class="col-sm-12">
+                                <a routerLink="/master/supervisor-detail" class="btn btn-block btn-info active" style="cursor: pointer;">
+                                    <i class="fa fa-backward"></i> Back to listing</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form #addForm="ngForm" (ngSubmit)="SaveData(addForm)"  novalidate>
+                    <div class="col-sm-12">
+                        <div class="row margin-top-20px">
+                            <div class="col-md-3 form-group">
+                                <label>Role Name</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #Name="ngModel" class="form-control" name="Name" [(ngModel)]="elements.Name">
+                                <div *ngIf="(addForm.submitted &&  Name.errors)">
+                                    <div *ngIf="Name.errors.required">
+                                        <sup style="color:red;font-size: 15px"> required.</sup>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-12" class="row margin-top-20px margin-bottom-20px">
+
+                        <div class="col-sm-8"></div>
+                        <!-- <div class="col-sm-2">
+
+                            <a routerLink="" class="btn btn-block btn-danger">
+                                <i class="fa fa-arrows-alt"></i> Cancel
+                            </a>
+
+                        </div> -->
+                        <div class="col-sm-2">
+                            <!-- <button class="btn btn-block btn-success" (ngSubmit)="onSubmit(addForm)">
+                                <i class="fa fa-floppy-o"></i> Save
+                            </button> -->
+                            <button type="submit" class="btn btn-primary px-4">
+                               Save
+                            </button>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+<style>
+    .manual-date-edit input {
+        width: 15px;
+        position: relative;
+        top: 17px;
+    }
+
+    .manual-date-edit label {
+        margin-left: 15px;
+    }
+
+    .back-buttons .btn {
+        padding: 10px 14px 10px 7px;
+    }
+</style>

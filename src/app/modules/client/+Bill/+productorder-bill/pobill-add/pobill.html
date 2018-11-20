@@ -1,0 +1,710 @@
+<div class="pre-loader" *ngIf="apiResponsesLoderFlag.length>0">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+<div id="content" class="capitalize">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-edit"></i>Product Order Bill Creation
+                    <div class="card-header-actions">
+                        <div class="row back-buttons">
+                            <div class="col-sm-12">
+                                <a routerLink="/bill/po-bill" class="btn btn-block btn-info active" style="cursor: pointer;">
+                                    <i class="fa fa-backward"></i> Back to listing</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form>
+                        <div class="row margin-top-20px">
+                                <div class="col-sm-6">
+                                        <div class="row custom-grid">
+                                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                                    <div class="custom-grid-input-label-inner">
+                                                        Vendor Code
+                                                    </div>
+                                                </div>
+                                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">                
+                                                    <div class="custom-grid-input-label-inner">
+                                                        {{vendorDetails.Code}}
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="row custom-grid">
+                                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                                    <div class="custom-grid-input-label-inner">
+                                                        Vendor Name
+                                                    </div>
+                                                </div>
+                                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                
+                                                    <div class="custom-grid-input-label-inner">
+                                                        {{vendorDetails.Name}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <div class="row custom-grid">
+                                        <div class="col-sm-4 custom-grid-input-label-outer">
+                                            <div class="custom-grid-input-label-inner">
+                                                Address
+                                            </div>
+                                        </div>
+                                        <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+        
+                                            <div class="custom-grid-input-label-inner">
+                                                {{vendorDetails.FullAddress}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row custom-grid">
+                                            <div class="col-sm-4 custom-grid-input-label-outer">
+                                                <div class="custom-grid-input-label-inner">
+                                                    Postal Code
+                                                </div>
+                                            </div>
+                                            <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+            
+                                                <div class="custom-grid-input-label-inner">
+                                                    {{vendorDetails.ZipCode}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row custom-grid">
+                                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                                    <div class="custom-grid-input-label-inner">
+                                                        State Code
+                                                    </div>
+                                                </div>
+                                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                
+                                                    <div class="custom-grid-input-label-inner">
+                                                        {{vendorDetails.StateName}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <div class="row custom-grid">
+                                        <div class="col-sm-4 custom-grid-input-label-outer">
+                                            <div class="custom-grid-input-label-inner">
+                                                GSTIN
+                                            </div>
+                                        </div>
+                                        <div class="custom-grid-left col-sm-8 custom-grid-min-height custom-grid-input-label-outer">
+                                            <div class="custom-grid-min-height">
+                                                {{vendorDetails.GSTNO}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row custom-grid">
+                                            <div class="col-sm-4 custom-grid-input-label-outer">
+                                                <div class="custom-grid-input-label-inner">
+                                                    PAN No.
+                                                </div>
+                                            </div>
+                                            <div class="custom-grid-left col-sm-8 custom-grid-min-height custom-grid-input-label-outer">
+                                                <div class="custom-grid-min-height">
+                                                    {{vendorDetails.PANNo}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row custom-grid">
+                                        <div class="col-sm-4 custom-grid-input-label-outer">
+                                            <div class="custom-grid-input-label-inner">
+                                                <!--Serial No.-->
+                                               PO No
+                                            </div>
+                                        </div>
+                                        <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                            <div class="custom-grid-input-label-inner">
+                                                    <input type="text" name="PONo" [(ngModel)]="productOrderBillCreation.PONo" class="form-control text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                        <div class="row custom-grid">
+                                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                                    <div class="custom-grid-input-label-inner">
+                                                        <!--Serial No.-->
+                                                        Job/Contract No
+                                                    </div>
+                                                </div>
+                                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                                    <div class="custom-grid-input-label-inner">
+                                                            <input type="text" name="JobOrderNo" [(ngModel)]="productOrderBillCreation.JobOrderNo" class="form-control dropdown">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row custom-grid">
+                                                    <div class="col-sm-4 custom-grid-input-label-outer">
+                                                        <div class="custom-grid-input-label-inner">
+                                                            <!--Serial No.-->
+                                                            PO Type
+                                                        </div>
+                                                    </div>
+                                                    <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                                        <div class="custom-grid-input-label-inner">
+                                                                <select class="form-control dropdown" name="item" [(ngModel)]="productOrderBillCreation.POType">
+                                                                        <option value="">Select PO Type</option>
+                                                                        <option *ngFor="let item of poTypeList;" value="{{item.Id}}">{{item.Name}}</option>
+                                                                    </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row custom-grid">
+                                                        <div class="col-sm-4 custom-grid-input-label-outer">
+                                                            <div class="custom-grid-input-label-inner">
+                                                                <!--Serial No.-->
+                                                                Department
+                                                            </div>
+                                                        </div>
+                                                        <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                                            <div class="custom-grid-input-label-inner">
+                                                                    <select class="form-control dropdown" name="item" [(ngModel)]="productOrderBillCreation.ServiceType">
+                                                                            <option value="">Select Department</option>
+                                                                            <option *ngFor="let item of poDepartmentList;" value="{{item.Id}}">{{item.Name}}</option>
+                                                                        </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                    <div class="row custom-grid">
+                                        <div class="col-sm-4 custom-grid-input-label-outer">
+                                            <div class="custom-grid-input-label-inner">
+                                                Date Opened
+                                            </div>
+                                        </div>
+                                        <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                            <div class="custom-grid-input-label-inner">
+                                                <div class="col-sm-10" [hidden]="!productOrderBillCreation.dateType" style="padding-right: 0px;">
+                                                    <div class="select">
+                                                        <div class="custom-input">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-10 transectionDateSystem" [hidden]="productOrderBillCreation.dateType" style="padding-right: 0px;">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" placeholder="Datepicker" bsDatepicker [(ngModel)]="productOrderBillCreation.JobStartDate"
+                                                            #dp="bsDatepicker" name="JobStartDate" />
+                                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                        <!-- (bsValueChange)="onValueChange($event)" -->
+                                                        <!-- <div>
+                                                            <button class="btn btn-block btn-secondary" type="button" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">
+                                                                <i class="cui-calendar icons"></i>
+                                                            </button>
+        
+                                                        </div> -->
+        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row custom-grid">
+                                            <div class="col-sm-4 custom-grid-input-label-outer">
+                                                <div class="custom-grid-input-label-inner">
+                                                   PO Date 
+                                                </div>
+                                            </div>
+                                            <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                                <div class="custom-grid-input-label-inner">
+                                                    <div class="col-sm-10" [hidden]="!productOrderBillCreation.dateType" style="padding-right: 0px;">
+                                                        <div class="select">
+                                                            <div class="custom-input">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-10 transectionDateSystem" [hidden]="productOrderBillCreation.dateType" style="padding-right: 0px;">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" placeholder="Datepicker" bsDatepicker [(ngModel)]="productOrderBillCreation.PODate"
+                                                                #dp="bsDatepicker" name="PODate" />
+                                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                            <!-- (bsValueChange)="onValueChange($event)" -->
+                                                            <!-- <div>
+                                                                <button class="btn btn-block btn-secondary" type="button" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">
+                                                                    <i class="cui-calendar icons"></i>
+                                                                </button>
+            
+                                                            </div> -->
+            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row custom-grid">
+                                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                                    <div class="custom-grid-input-label-inner">
+                                                        Valid UpTo
+                                                    </div>
+                                                </div>
+                                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                                    <div class="custom-grid-input-label-inner">
+                                                        <div class="col-sm-10" [hidden]="!productOrderBillCreation.dateType" style="padding-right: 0px;">
+                                                            <div class="select">
+                                                                <div class="custom-input">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-10 transectionDateSystem" [hidden]="productOrderBillCreation.dateType" style="padding-right: 0px;">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" placeholder="Datepicker" bsDatepicker [(ngModel)]="productOrderBillCreation.RequestDate"
+                                                                    #dp="bsDatepicker" name="RequestDate" />
+                                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                                <!-- (bsValueChange)="onValueChange($event)" -->
+                                                                <!-- <div>
+                                                                    <button class="btn btn-block btn-secondary" type="button" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">
+                                                                        <i class="cui-calendar icons"></i>
+                                                                    </button>
+                
+                                                                </div> -->
+                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                </div>
+                            </div>
+                        <div class="row margin-top-20px">
+                            <!-- <div class="form-group col-md-3 ">
+                                <div class="manual-date-edit">
+                                    <input (change)="manualCheckBoxClick()" class="form-control dropdown" type="checkbox" [(ngModel)]="productOrderBillCreation.dateType"
+                                        name="dateType">
+                                    <label class="label">Manual Date</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Session</label>
+                                <sup style="color:red;">*</sup>
+                                <select (change)="onSessionChange()" class="form-control dropdown" name="session" [(ngModel)]="productOrderBillCreation.session">
+                                    <option value="">Select Session</option>
+                                    <option *ngFor="let sessionItem of sessionList;" value="{{sessionItem.session_uuid}}">{{sessionItem.session_name}}</option>
+                                </select>
+                            </div> -->
+                            <div class="col-md-3 form-group">
+                                    <label>Company</label>
+                                    <sup style="color:red;">*</sup>
+                                    <select (change)="SupplierBranchList(productOrderBillCreation.SupplierId)" class="form-control dropdown" name="SupplierId" [(ngModel)]="productOrderBillCreation.SupplierId" CompanyId="ngModel">
+                                        <option value="">Select Company</option>
+                                        <option *ngFor="let company of companyList;" value="{{company.ID}}">{{company.Name}}</option>
+                                    </select>
+                                </div>
+                            <div class="form-group col-md-3">
+                                <label>Area Office</label>
+                                <sup style="color:red;">*</sup>
+                                <select (change)="onReceiverChange(productOrderBillCreation.BranchId)" class="form-control dropdown" name="BranchId" [(ngModel)]="productOrderBillCreation.BranchId">
+                                    <option value="">Select Area Office Name</option>
+                                    <option *ngFor="let branch of branchList;" value="{{branch.Id}}">{{branch.Name}}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                    <label>Supervisor Name</label>
+                                    <sup style="color:red;">*</sup>
+                                    <select class="form-control dropdown" name="SuppervisorId" [(ngModel)]="productOrderBillCreation.SuppervisorId">
+                                        <option value="">Select Supervisor Name</option>
+                                        <option *ngFor="let item of employeeList;" value="{{item.Id}}">{{item.FirstName}} {{item.LastName}}</option>
+                                    </select>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                    <label>Site Name</label>
+                                    <sup style="color:red;">*</sup>
+                                    <select (change)="onsiteChange(productOrderBillCreation.ProjectId)" class="form-control dropdown" name="ProjectId" [(ngModel)]="productOrderBillCreation.ProjectId">
+                                        <option value="">Select Site</option>
+                                        <option *ngFor="let project of projectList;" value="{{project.Id}}">{{project.Name}}</option>
+                                    </select>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <label>upload file</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="file" name="pic" id="pic" accept="image/gif, image/jpeg" />
+                        </div>
+                            
+                        </div>
+
+                    
+
+                    <div class="row margin-top-20px custom-grid-title">
+                        <div class="col-sm-6">Details of Supplier : Receiver [Billed to]</div>
+                        <div class="col-sm-3 padding-right-zero">Details of Consignee [Shipped to]:</div>
+                        <!-- <div class="col-sm-3 padding-left-right-zero">
+                            <div class="col-sm-1 col-sm-one-and-half">
+                                <input id="consigneeAddressSameAsReceiver" type="checkbox" [(ngModel)]="productOrderBillCreation.is_consignee_same" (change)="onChangeConsigneeAddressSameAsReceiver()"
+                                    name="consigneeAddressSameAsReceiver">
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="label" for="consigneeAddressSameAsReceiver">Same As Receiver</label>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row custom-grid">
+                                <div class=" col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Name
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{receiverDetails.name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Address
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{receiverDetails.address}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        State
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{receiverDetails.state_name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        State Code
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{receiverDetails.state_code}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        GST No
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        {{receiverDetails.gst}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Name
+                                      
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner name">
+                                        {{productOrderBillCreation.consignee_name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        Address
+                                     
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner address">
+                                        {{productOrderBillCreation.consignee_address}}
+                                           
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        State
+                                       
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner state">
+                                        {{productOrderBillCreation.consignee_state}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        State Code
+                                       
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner stateCode">
+                                        {{productOrderBillCreation.consignee_code}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-grid">
+                                <div class="col-sm-4 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                        GST No
+                                        <!--<sup style="color:red;">*</sup>-->
+                                    </div>
+                                </div>
+                                <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                    <div class="custom-grid-input-label-inner">
+                                       {{productOrderBillCreation.consignee_gstin}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- -->
+                    <div class="row margin-top-20px">
+                            <div class="col-sm-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" style="margin-bottom: 0px;">
+                                <thead style="background:#f0f3f5;">
+                                    <tr>
+                                        <th style="width: 2%;">#</th>
+                                        
+                                        <th style="width: 28%;">
+                                            Items.
+                                            <sup style="color:red;">*</sup>
+                                        </th>
+                                        <th style="width: 28%;">
+                                            Items Desc.
+                                            <sup style="color:red;">*</sup>
+                                        </th>
+                                        <th style="width: 10%;">HSN Code </th>
+                                        <th style="width: 10%;">
+                                            Job No
+                                            <sup style="color:red;">*</sup>
+                                        </th>
+                                        <th style="width: 10%;">
+                                            Qty.
+                                            <sup style="color:red;">*</sup>
+                                        </th>
+                                        <th style="width: 10%;">UOM</th>
+                                        <th style="width: 10%;">Rate</th>
+                                        <!-- <th>Total</th> -->
+                                        <!-- <th style="min-width: 80px;">Discount</th> -->
+                                        <th style="width: 10%;">Total</th>
+                                        <th style="width: 5%;">CGST</th>
+                                        <th style="width: 5%;">SGST</th>
+                                        <th style="width: 5%;">IGST</th>
+                                        <th style="width: 5%;">Add</th>
+                                    </tr>
+                                    <!-- <tr>
+                                        <th>Rate</th>
+                                        <th>Aml</th>
+                                        <th>Rate</th>
+                                        <th>Aml</th>
+                                        <th>Rate</th>
+                                        <th>Aml</th>
+                                    </tr> -->
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of itemRows; let itemIndex = index">
+                                        <td class="custom-grid-td">{{itemIndex+1}}</td>
+                                       
+                                        <td class="custom-grid-td">
+                                                <select class="form-control drop-down" (change)="onProductChange(productOrderBillCreation.productitemListArray[itemIndex],itemIndex)" name="productitem{{itemIndex}}" [(ngModel)]="productOrderBillCreation.productitemListArray[itemIndex]">
+                                                        <option value="">Select</option>
+                                                        <option *ngFor="let product of productList;" value="{{product.Id}}">{{product.product_item_name}}</option>
+                                                </select>
+                                        </td>
+                                        <td class="custom-grid-td">
+                                            <input type="text" name="ProductDescription{{itemIndex}}" [(ngModel)]="productOrderBillCreation.ProductDescription[itemIndex]" class="form-control custom-grid-input">
+                                    </td>
+                                        <td class="custom-grid-td">
+                                            <input type="text" name="hsn{{itemIndex}}" [(ngModel)]="productOrderBillCreation.hsnListArray[itemIndex]" class="form-control custom-grid-input">
+                                        </td>
+                                        <td class="custom-grid-td">
+                                            <input type="text" name="JobContractNo{{itemIndex}}"  [(ngModel)]="productOrderBillCreation.JobContractNo[itemIndex]"
+                                                class="form-control custom-grid-input" value="">
+                                        </td>
+                                        <td class="custom-grid-td">
+                                            <input number="true" type="float" name="qty{{itemIndex}}" (change)="onQtyChange()" [(ngModel)]="productOrderBillCreation.qtyListArray[itemIndex]"
+                                                class="form-control custom-grid-input" value="">
+                                        </td>
+                                        <td class="custom-grid-td">
+                                            <select class="form-control drop-down" name="qtycode{{itemIndex}}" [(ngModel)]="productOrderBillCreation.qtycodeListArray[itemIndex]">
+                                                <option value="">Select</option>
+                                                <option value="1">EA</option>
+                                                <option value="2">Unit</option>
+                                                <option value="3">Nos</option>
+                                            </select>
+                                        </td>
+
+                                        <td class="custom-grid-td">
+                                            <input number="true" type="float" name="valueperunit{{itemIndex}}" (change)="onvalueChange()" [(ngModel)]="productOrderBillCreation.valueperunitListArray[itemIndex]"
+                                                class="form-control custom-grid-input">
+
+                                        </td>
+                                        <td class="custom-grid-td">
+                                            {{productOrderBillCreation.taxableAmountListArray[itemIndex]}}
+                                        </td>
+
+                                        <td class="custom-grid-td">
+                                           
+                                            <input number="true" type="float" name="cgstAmountListArray{{itemIndex}}" (change)="ontaxamountChange()"
+                                            [disabled]="true"   [(ngModel)]="productOrderBillCreation.cgstAmountListArray[itemIndex]"
+                                                class="form-control custom-grid-input">
+                                        </td>
+ 
+                                        <td class="custom-grid-td">
+                                            
+                                            <input number="true" type="float" name="sgstAmountListArray{{itemIndex}}" (change)="onvalueChange()"
+                                            [disabled]="true" [(ngModel)]="productOrderBillCreation.sgstAmountListArray[itemIndex]"
+                                               class="form-control custom-grid-input">
+                                        </td>
+                                       
+                                        <td class="custom-grid-td">
+                                           
+                                            <input number="true" type="float" name="igstAmountListArray{{itemIndex}}" (change)="onvalueChange()"
+                                          [disabled]="true"  [(ngModel)]="productOrderBillCreation.igstAmountListArray[itemIndex]"
+                                               class="form-control custom-grid-input">
+                                        </td>
+                                        <td>
+                                            <div *ngIf="itemIndex==itemRowsCount-1">
+                                                <button class="btn btn-block btn-primary active" type="button" title="Add New" (click)="addItemRow(itemIndex, true);">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+
+                                            <div>
+                                                <button class="btn btn-block btn-danger" type="button" *ngIf="itemIndex>0" (click)="removeItemRow(itemIndex);">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="custom-grid-td">Total</td>
+                                        <td class="custom-grid-td">--</td>
+                                        <td class="custom-grid-td">--</td>
+                                        <td class="custom-grid-td">--</td>
+                                        <td class="custom-grid-td">--</td>
+                                        <td class="custom-grid-td">{{productOrderBillCreation.total_qty}}</td>
+                                        <td class="custom-grid-td">--</td>
+                                        <td class="custom-grid-td">--</td>
+                                        <td class="custom-grid-td">{{productOrderBillCreation.totalAmount}}</td>
+                                       
+                                        <!-- <td class="custom-grid-td">{{productOrderBillCreation.total_discount}}</td>
+                                        <td class="custom-grid-td">{{productOrderBillCreation.taxableAmount}}</td> -->
+                                        <!-- <td class="custom-grid-td">--</td> -->
+                                        <td class="custom-grid-td">
+                                            {{productOrderBillCreation.totalcgst}}
+                                        </td>
+                                        <!-- <td class="custom-grid-td">--</td> -->
+                                        <td class="custom-grid-td">
+                                            {{productOrderBillCreation.totalsgst}}
+                                        </td>
+                                        <!-- <td class="custom-grid-td">--</td> -->
+                                        <td class="custom-grid-td">
+                                            {{productOrderBillCreation.totaligst}}
+                                        </td>
+
+                                        <td></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+                 
+
+                    <div class="row margin-top-20px">
+                        <div class="col-sm-4" style="width:30%;">
+                            <span style="font-weight: bold;"> Total Amount (In Figure) : </span>
+                            <i class="fa fa-inr"></i>{{productOrderBillCreation.taxableAmount}}
+                        </div>
+                        <div class="col-sm-8" style="width:70%;">
+                            <span style="font-weight: bold;"> Total Amount (In Words) : </span>
+                            <span class="capitalize">{{ total_amount }}</span>
+                        </div>
+                    </div>
+                    <!-- <div class="row margin-top-20px">
+                        <div class="col-sm-2" style="width:145px;">
+                            <label>Vehicle Number</label>
+                            <div class="">
+                                <input type="text" placeholder="UP 82 Y 0001" [(ngModel)]="productOrderBillCreation.vehicle_number" name="vehicleNumber"
+                                    class="form-control" style="text-transform: uppercase;">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label> Bill Amt. Subject To Reverse Charges</label>
+                            <div class="select">
+                                <select class="form-control drop-down" name="isBillSubjectToReverseCharges" [(ngModel)]="productOrderBillCreation.is_bill_subject_to_reverse_charges">
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3" style="width: 301px;">
+                            <div style="width : 127px; float: left;padding-right: 13px;">
+                                <label>Reference Prefix</label>
+                                <select style="padding-right: 6px;" class="form-control drop-down" name="branchInvoiceReferencePrefix" [(ngModel)]="productOrderBillCreation.branch_invoice_reference_prefix">
+                                    <option value="">Select Prefix</option>
+                                    <option *ngFor="let pre of branchDetails.branch_invoice_reference_prefix_list;" value="{{pre.branch_invoice_reference_prefix_uuid}}">{{pre.branch_invoice_reference_prefix}}</option>
+                                </select>
+                            </div>
+                            <div style="width : 125px; float: left; padding-right: 0px;">
+                                <label>Reference Number</label>
+                                <input type="text" [(ngModel)]="productOrderBillCreation.reference_number" name="reference_number" class="form-control" style="text-transform: uppercase;">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="row" class="row margin-top-20px margin-bottom-20px">
+                    
+                        <div class="col-sm-8"></div>
+                        <div class="col-sm-2">
+                            
+                            <a routerLink="{{invoiceListingLink}}" class="btn btn-block btn-danger">
+                                <i class="fa fa-arrows-alt"></i> Cancel
+                            </a>
+                       
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-block btn-success" type="submit" (click)="onSubmit()">
+                                <i class="fa fa-floppy-o"></i> Save &amp; New
+                        </button>
+                    </div>
+            </div>
+            <div class="row margin-top-20px"></div>
+
+            </form>
+
+        </div>
+    </div>
+    <!--/.col-->
+</div>
+</div>
+<style>
+    .manual-date-edit input {
+        width: 15px;
+        position: relative;
+        top: 17px;
+    }
+
+    .manual-date-edit label {
+        margin-left: 15px;
+    }
+
+    .back-buttons .btn {
+        padding: 10px 14px 10px 7px;
+    }
+</style>

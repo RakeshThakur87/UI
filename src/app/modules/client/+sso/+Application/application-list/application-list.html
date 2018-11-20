@@ -1,0 +1,60 @@
+<div id="content" class="capitalize">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>Application Details
+                    <div class="card-header-actions">
+
+                        <div class=" row back-buttons">
+                            <div class="col-sm-12">
+                                <a routerLink="/sso/add-application" class="btn btn-block btn-outline-success active">
+                                    <i class="fa fa-plus"></i> Add New</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Application Name</th>
+                                    <th>Code</th>
+                                    <th>Type</th>                                    
+                                    <th>URL</th> 
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let item of ListObj let itemIndex = index">
+                                    <tr>                                      
+                                        <td>{{item.Name}}</td>
+                                        <td>{{item.ApplicationCode}}</td>  
+                                        <td>{{item.ApplicationType}}</td>                                                                              
+                                        <td>{{item.ApplicationUrl}}</td>
+                                        <td>{{item.ActiveStatus}}</td>
+                                        <td> 
+                                            <a (click)="email(item)">
+                                            <span class="padding-5 fa fa-edit cursor-pointer btn-color-edit"></span> 
+                                            </a>
+
+                                            <a placement="bottom" (click)="ondelete()" ngbTooltip="Tooltip on bottom">
+                                                    <span class="padding-5 fa fa-trash cursor-pointer btn-color-delete"></span> 
+                                            </a>
+                                    
+                                    </td>                                
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>

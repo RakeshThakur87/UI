@@ -1,0 +1,343 @@
+<nb-card>
+    <nb-card-header class="text-center">
+        <div class="row">
+            <div class="col-md-9">
+                <h4 class="title">Add New Project</h4>
+            </div>
+            <div class="col-md-3">
+                <button nbButton (click)="showToast('top-right', 'success')" class="btn btn-success">
+                    <i class="fa fa-backward"> Back to List</i>
+                </button>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <form *ngIf="!isSuccess; else successMessage" [ngClass]="{ 'form-submit': isSubmit}" (ngSubmit)="onSubmit()"
+            name="addnewitemForm" [formGroup]="addnewitemForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <nb-card formGroupName="dataInfo">
+                        <nb-card-header>Project Details</nb-card-header>
+                        <nb-card-body>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Select Client Name</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Client Name.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Client Name no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="IndustryCode">Project Name</label>
+                                        <input type="text" formControlName="IndustryCode" name="IndustryCode" class="form-control"
+                                            id="IndustryCode" placeholder="Last Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].IndustryCode.dirty || addnewitemForm['controls'].dataInfo['controls'].IndustryCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.required">
+                                                Please enter a Industry Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.maxlength">
+                                                Please enter a Industry Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Select Project Code</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Project Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Project Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="IndustryCode">Project Start Date</label>
+                                        <input type="text" formControlName="IndustryCode" name="IndustryCode" class="form-control"
+                                            id="IndustryCode" placeholder="Last Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].IndustryCode.dirty || addnewitemForm['controls'].dataInfo['controls'].IndustryCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.required">
+                                                Please enter a Industry Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.maxlength">
+                                                Please enter a Industry Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Select Project Description</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Project Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Project Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="IndustryCode">Project Manager Name</label>
+                                        <input type="text" formControlName="IndustryCode" name="IndustryCode" class="form-control"
+                                            id="IndustryCode" placeholder="Last Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].IndustryCode.dirty || addnewitemForm['controls'].dataInfo['controls'].IndustryCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.required">
+                                                Please enter a Industry Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.maxlength">
+                                                Please enter a Industry Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                        <nb-card-header>Billing Details</nb-card-header>
+                        <nb-card-body>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Select Client Name</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Client Name.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Client Name no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="IndustryCode">Project Name</label>
+                                        <input type="text" formControlName="IndustryCode" name="IndustryCode" class="form-control"
+                                            id="IndustryCode" placeholder="Last Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].IndustryCode.dirty || addnewitemForm['controls'].dataInfo['controls'].IndustryCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.required">
+                                                Please enter a Industry Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.maxlength">
+                                                Please enter a Industry Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Select Project Code</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Project Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Project Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="IndustryCode">Project Start Date</label>
+                                        <input type="text" formControlName="IndustryCode" name="IndustryCode" class="form-control"
+                                            id="IndustryCode" placeholder="Last Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].IndustryCode.dirty || addnewitemForm['controls'].dataInfo['controls'].IndustryCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.required">
+                                                Please enter a Industry Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.maxlength">
+                                                Please enter a Industry Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Select Project Description</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Project Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Project Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="IndustryCode">Project Manager Name</label>
+                                        <input type="text" formControlName="IndustryCode" name="IndustryCode" class="form-control"
+                                            id="IndustryCode" placeholder="Last Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].IndustryCode.dirty || addnewitemForm['controls'].dataInfo['controls'].IndustryCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.required">
+                                                Please enter a Industry Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.maxlength">
+                                                Please enter a Industry Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                        <nb-card-header>Shipping Details</nb-card-header>
+                        <nb-card-body>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Select Client Name</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Client Name.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Client Name no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="IndustryCode">Project Name</label>
+                                        <input type="text" formControlName="IndustryCode" name="IndustryCode" class="form-control"
+                                            id="IndustryCode" placeholder="Last Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].IndustryCode.dirty || addnewitemForm['controls'].dataInfo['controls'].IndustryCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.required">
+                                                Please enter a Industry Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.maxlength">
+                                                Please enter a Industry Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Select Project Code</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Project Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Project Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="IndustryCode">Project Start Date</label>
+                                        <input type="text" formControlName="IndustryCode" name="IndustryCode" class="form-control"
+                                            id="IndustryCode" placeholder="Last Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].IndustryCode.dirty || addnewitemForm['controls'].dataInfo['controls'].IndustryCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.required">
+                                                Please enter a Industry Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.maxlength">
+                                                Please enter a Industry Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Select Project Description</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Project Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Project Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="IndustryCode">Project Manager Name</label>
+                                        <input type="text" formControlName="IndustryCode" name="IndustryCode" class="form-control"
+                                            id="IndustryCode" placeholder="Last Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].IndustryCode.dirty || addnewitemForm['controls'].dataInfo['controls'].IndustryCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.required">
+                                                Please enter a Industry Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.maxlength">
+                                                Please enter a Industry Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+            <div class="row">
+                <div style="float:right;" class="col-md-9 btnright">
+                </div>
+                <div class="col-md-3 btnright">
+                    <button type="submit" class="btn btn-dark">
+                        <i class="fa fa-save"> Save</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <ng-template #successMessage>
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            <a class="btn btn-info" routerLink="/auth/login">Log In</a>
+        </ng-template>
+    </nb-card-body>
+</nb-card>

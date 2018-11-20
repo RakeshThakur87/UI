@@ -1,0 +1,94 @@
+<div  class="capitalize">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="widget-body panel panel-default padding-10">
+				<fieldset>
+					<sa-widgets-grid>
+                        <form [saBootstrapValidator]="addressValidatorOptions">
+                            <div class="row margin-bott0m-10px">
+                                <div class="col-sm-12">
+                                    <label >Address</label>
+                                    <span *ngIf="is_costcenter" style="color: red;float: right;">* These fields are mandatory for the purpose of Invoices</span>
+                                    <div class="address">
+                                        <textarea style="resize: vertical" id="addressInput" class="form-control padding-5"   [(ngModel)]="addressData.address" address="ngModel" 
+                                        name="address" placeholder="Enter Address here" rows="4"></textarea>                                
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row margin-bott0m-10px">
+                                <div class="col-sm-3">
+                                    <label >Country<sup *ngIf="is_costcenter" style="color:red;"> *</sup></label>
+                                    <div class="select country">
+                                        <select class="form-control" (change)="getState()" 
+                                        [(ngModel)]="addressData.country_uuid" country_uuid="ngModel"  name="country">
+                                            <!--<option value="">Select Country</option>-->
+                                            <option *ngFor="let country of countrylist" value="{{country.country_uuid}}" >{{country.country_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label >State<sup *ngIf="is_costcenter" style="color:red;"> *</sup></label>
+                                    <div class="select state">
+                                        <select class="form-control ng-untouched ng-pristine ng-valid" (change)="getDistrict()"  
+                                            [(ngModel)]="addressData.state_uuid" state_uuid="ngModel" name="state">
+                                            <option value="">Select State</option>
+                                            <option *ngFor="let state of stateslist" value="{{state.state_uuid}}">{{state.state_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label >District<sup *ngIf="is_costcenter" style="color:red;"> *</sup></label>
+                                    <div class="select district">
+                                        <select class="form-control" (change)="getCity()" [(ngModel)]="addressData.district_uuid" district_uuid="ngModel"  name="district">
+                                            <option  value="">Select District</option>
+                                            <option *ngFor="let district of districtslist" value="{{district.district_uuid}}" >{{district.district_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label >City <sup *ngIf="is_costcenter" style="color:red;"> *</sup></label>
+                                    <div class="select city">
+                                        <select id="city" class="form-control" [(ngModel)]="addressData.city_uuid" city_uuid="ngModel"  name="city">
+                                            <option  value="">Select City</option>
+                                            <option *ngFor="let city of citieslist" value="{{city.city_uuid}}"  >{{city.city_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row margin-bott0m-10px">
+                                <div class="col-sm-3">
+                                    <label >PIN Code</label>
+                                    <div class="pincode">
+                                        <input [(ngModel)]="addressData.pin_code" pin_code="ngModel"  class="form-control ng-untouched ng-pristine ng-valid" name="pincode" 
+                                        placeholder="Enter PIN code" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label >Phone</label>
+                                    <div class="phone">
+                                        <input [(ngModel)]="addressData.phone" phone="ngModel" id="phone"  class="form-control ng-untouched ng-pristine ng-valid" name="phone" 
+                                        placeholder="Enter Phone number" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label >Fax</label>
+                                    <div class="fax">
+                                        <input fax="ngModel" [(ngModel)]="addressData.fax"  class="form-control ng-untouched ng-pristine ng-valid" name="fax" 
+                                        placeholder="Enter fax number" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label >Email</label>
+                                    <div class="email">
+                                        <input email="ngModel" [(ngModel)]="addressData.email"  class="form-control ng-untouched ng-pristine ng-valid" name="email" 
+                                        placeholder="Enter Email address" type="text">                                
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </sa-widgets-grid>
+                </fieldset>
+			</div>
+		</div>
+	</div>
+</div>

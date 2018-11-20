@@ -1,0 +1,79 @@
+<!-- MAIN CONTENT -->
+<div class="pre-loader" *ngIf="costcategoryFlag">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+<div id="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+			<h1 class="page-title txt-color-blueDark">
+				<i class="fa fa-edit fa-fw "></i> Charts Of Account
+				<span>&gt; Cost Category</span>
+			</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="widget-body panel panel-default padding-10">
+				<fieldset class="padding-10">
+					<legend class="padding-top-15 padding-bottom-5">Listing  
+						<div class="col-sm-3 col-xs-7 pull-right text-right">
+							<a routerLink="/chartsofaccount/cost-category-create" class="btn-sm btn-info">
+								<i class="fa fa-plus"></i> New Cost Category
+							</a>
+						</div>
+					</legend>
+					<sa-widgets-grid>
+						<div *ngIf="successMessage" class="alert alert-success alert-custom">
+							<button class="close" data-dismiss="alert">	× </button>
+							<div><strong>Success</strong> {{successMessage}}</div>
+						</div>
+						<div class="row table-responsive">
+							<article class="col-sm-12">
+								<sa-widgets-grid>
+									<!-- row -->
+									<div class="row">
+										<!-- NEW WIDGET START -->
+										<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+											<!-- Widget ID (each widget will need unique ID)-->
+											<sa-widget class="well">									
+												<header>
+													<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+													<h2>Widget Title </h2>
+												</header>
+												<!-- widget div-->
+												<div>
+													<!-- widget content -->
+													<div class="widget-body no-padding" data-sparkline-container="">
+														<sa-datatable [options]="options" [detailsFormat]="detailsFormat" tableClass="display projects-table table table-striped table-bordered table-hover"
+															width="100%">
+															<thead>
+																<tr>
+																	<th style="width:12%">Action</th>
+																	<th>Cost Category Name</th>
+																	<!--<th>Company</th>	-->
+																</tr>
+															</thead>
+															
+														</sa-datatable>
+													</div>
+													<!-- end widget content -->
+												</div>
+												<!-- end widget div -->
+											</sa-widget>
+											<!-- end widget -->
+										</article>
+										<!-- WIDGET END -->
+									</div>
+									<!-- end row -->
+								</sa-widgets-grid>
+								<!-- end widget grid -->
+							</article>
+						</div>
+					</sa-widgets-grid>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+	<!-- END MAIN CONTENT -->
+</div>
+

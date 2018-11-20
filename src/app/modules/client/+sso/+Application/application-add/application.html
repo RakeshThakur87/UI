@@ -1,0 +1,112 @@
+<div class="pre-loader" *ngIf="apiResponsesLoderFlag.length>0">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+<div id="content" class="capitalize card-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-edit"></i>Application Master
+                    <div class="card-header-actions">
+                        <div class="row back-buttons">
+                            <div class="col-sm-12">
+                                <a routerLink="/master/supervisor-detail" class="btn btn-block btn-info active" style="cursor: pointer;">
+                                    <i class="fa fa-backward"></i> Back to listing</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                <form #addForm="ngForm" (ngSubmit)="submit(addForm)" novalidate>
+                    <div class="col-sm-12">
+                        <div class="row margin-top-20px">
+                            <div class="col-md-6 form-group">
+                                <label>Application Name</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #Name="ngModel" class="form-control" name="Name"
+                                    [(ngModel)]="elements.Name">
+                                <div *ngIf="(addForm.submitted &&  Name.errors)">
+                                    <div *ngIf="Name.errors.required">
+                                        <sup style="color:red;font-size: 15px"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Application Code</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #ApplicationCode="ngModel" class="form-control" name="ApplicationCode"
+                                    [(ngModel)]="elements.ApplicationCode">
+                                <div *ngIf="(addForm.submitted &&  ApplicationCode.errors)">
+                                    <div *ngIf="ApplicationCode.errors.required">
+                                        <sup style="color:red;font-size: 15px"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Application Type</label>
+                                <sup style="color:red;">*</sup>
+                                <select class="form-control dropdown" required #ApplicationType="ngModel" name="ApplicationType"
+                                    [(ngModel)]="elements.ApplicationType">
+                                    <option value="">Select Application Type</option>
+                                    <option *ngFor="let list of applicationtypeobj;" value="{{list.id}}">{{list.value}}</option>
+                                </select>
+                                <div *ngIf="(addForm.submitted &&  ApplicationType.errors)">
+                                    <div *ngIf="ApplicationType.errors.required">
+                                        <sup style="color:red;font-size: 15px"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Application Url</label>
+                                <sup style="color:red;">*</sup>
+                                <input type="text" required #ApplicationUrl="ngModel" class="form-control" name="ApplicationUrl"
+                                    [(ngModel)]="elements.ApplicationUrl">
+                                <div *ngIf="(addForm.submitted &&  ApplicationUrl.errors)">
+                                    <div *ngIf="ApplicationUrl.errors.required">
+                                        <sup style="color:red;font-size: 15px"> required.</sup>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" class="row margin-top-20px margin-bottom-20px">
+
+                        <div class="col-sm-8"></div>
+                        <!-- <div class="col-sm-2">
+
+                            <a routerLink="" class="btn btn-block btn-danger">
+                                <i class="fa fa-arrows-alt"></i> Cancel
+                            </a>
+
+                        </div> -->
+                        <div class="col-sm-2">
+                            <button class="btn btn-block btn-success">
+                                <i class="fa fa-floppy-o"></i> Save
+                            </button>
+
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+<style>
+    .manual-date-edit input {
+        width: 15px;
+        position: relative;
+        top: 17px;
+    }
+
+    .manual-date-edit label {
+        margin-left: 15px;
+    }
+
+    .back-buttons .btn {
+        padding: 10px 14px 10px 7px;
+    }
+</style>

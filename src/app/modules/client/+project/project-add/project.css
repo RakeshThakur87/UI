@@ -1,0 +1,13 @@
+.ng-invalid.ng-touched:not(form) {
+    border: 1px solid #fa4251;
+  }
+
+  .input-group i {
+    position: absolute;
+    right: 4px;
+    top: 7px;
+    color: #2392c3;
+    cursor: pointer;
+    pointer-events: none;
+    font-size: 20px;
+  }

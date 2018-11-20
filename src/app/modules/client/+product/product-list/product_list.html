@@ -1,0 +1,53 @@
+<div id="content" class="capitalize">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>Product Detail
+                    <div class="card-header-actions">
+                        <div class=" row back-buttons">
+                            <div class="col-sm-12">
+                                <a routerLink="/product/product-creation" class="btn btn-block btn-outline-success active">
+                                    <i class="fa fa-plus"></i> Add New Product Item</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>
+                                    </th>
+                                    <th>Product Name</th>
+                                    <th>HSN Code</th>
+                                    <th>GST %</th>
+                                    <th>Agency %</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let item of productListObj let itemIndex = index">
+                                    <tr>
+                                        <td>{{item.ID}}</td>
+                                        <td>{{item.product_item_name}}</td>
+                                        <td>{{item.product_item_code}}</td>
+                                        <td>{{item.Tax}}</td>
+                                        <td>{{item.Tax}}</td>
+                                        <td><button class="btn btn-brand btn-sm btn-facebook" (click)="email(item)">
+                                            <i class="fa fa-edit"></i> 
+                                        </button></td>                                
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>

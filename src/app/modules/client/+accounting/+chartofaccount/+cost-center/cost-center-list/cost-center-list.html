@@ -1,0 +1,275 @@
+<!-- MAIN CONTENT -->
+<div class="pre-loader" *ngIf="costcenterFlag">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+<div id="content">
+	<!--<div [ngBusy]="busy"></div>-->
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+      <h1 class="page-title txt-color-blueDark">
+        <i class="fa fa-edit fa-fw "></i> Charts Of Account
+        <span>&gt; 
+								Cost Center 
+							</span>
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="widget-body panel panel-default">
+        <fieldset class="padding-10">
+          <legend style="margin-bottom:0px;">Listing 
+               <div class="col-sm-3 pull-right text-right">
+                    <a routerLink="/cost-center/cost-center-creation" class="btn-sm btn-info">
+                        <i class="fa fa-plus"></i> New Cost Center
+                    </a>
+                  </div>
+          </legend>
+          <div *ngIf="successMessage.length>0" class="alert alert-success alert-custom">
+            <button class="close" data-dismiss="alert">	× </button>
+            <div [hidden]="successMessage.length ==0">{{successMessage}}</div>
+          </div>
+          <div *ngIf="errorMessage.length>0" class="alert alert-danger alert-block">
+            <button class="close" data-dismiss="alert" (click)="resetErrors()">	× </button>
+            <div [hidden]="errorMessage.length ==0">{{errorMessage}}</div>
+          </div>
+					<div class="row">
+						<div class="form-group" style="margin-bottom:7px;">
+						<section class="col-sm-2 pull-left text-left">
+                <input class="form-control" type="text" [(ngModel)]="elements.serach_text" serach_text="ngModel" placeholder="Search Here" name="searchtext" (keyup.enter)="searchCostCenter($event)">
+            </section>
+						<button type="button" class="btn btn-default" (click)="searchCostCenter()">
+      				<span class="glyphicon glyphicon-search"></span> Search
+    				</button>
+						</div>
+					</div>
+          <sa-widgets-grid>
+            <div class="row">
+              <article class="col-sm-12">
+									<sa-widgets-grid>
+										<!-- row -->
+										<div class="row">
+											<!-- NEW WIDGET START -->
+											<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+												<sa-widget class="well">
+													<header>
+														<span class="widget-icon"> <i class="fa fa-comments"></i> </span>
+
+														<h2>Widget Title </h2>
+													</header>
+													<!-- widget div--> 
+													<div>
+														<!-- widget content -->
+														
+														<div class="widget-body no-padding" data-sparkline-container="">
+															
+															<sa-datatable [options]="options"
+																				[detailsFormat]="detailsFormat"
+																				tableClass="display projects-table table table-striped table-bordered table-hover"
+																				width="100%">
+																<thead>
+																<tr>
+																	<th style="width:12%">Action</th>
+																	<th>Cost Center Name</th>
+                                  <th>parent Cost Center Name</th>
+                                  <th>Cost Center Code</th>
+                                  <th>Category</th>																		
+																</tr>
+																</thead>
+															</sa-datatable>
+															
+														</div>
+													</div>
+												</sa-widget>
+											</article>
+										</div>
+									</sa-widgets-grid>		
+              </article>
+            </div>
+          </sa-widgets-grid>
+          <div class="dataTables_info" *ngIf="!costcenterFlag">
+            Showing {{ costcenterLenght }} of {{ total_record }} entries
+          </div>
+					<ul *ngIf="pager.totalPages && pager.totalPages > 0" class="pagination">
+          	<li [ngClass]="{disabled:pager.currentPage === 1}">
+                <button type="button" [disabled]="prvflag" (click)="setPage(1)">First</button>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <button type="button" [disabled]="prvflag" (click)="setPage(pager.currentPage - 1)">Previous</button>
+            </li>
+            <li *ngFor="let page of pag.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+          		<button type="button" [disabled]="nextflag" (click)="setPage(pager.currentPage + 1)">Next</button>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+              <button type="button" [disabled]="nextflag" (click)="setPage(pager.totalPages)">Last</button>
+            </li>
+          </ul>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END MAIN CONTENT-->
+<!-- </div> -->
+<div class="modal fade" id="budgetRequestDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">		
+				 <div class="col col-lg-12 bordered">
+          <div class="col col-lg-10">
+            <h3>Branches Associated with <span id="branch_name"></span> </h3>
+          </div>
+          <div class="col col-lg-2 padding-10">
+            <button class="col col-lg-2 close closeIconPadding" data-dismiss="modal">×</button>
+          </div>	
+        </div>
+      <footer class="text-right padding-10 modal-footer">
+							<button type="button"  class="btn btn-info btn-sm">
+									Update
+							</button>
+							<button type="button" class="btn btn-warning" data-dismiss="modal">
+								Close
+							</button>
+						</footer>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="groupDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+			<div class="col col-lg-12">
+          <div class="col col-lg-10">
+            <h3>Import Groups</h3>
+          </div>
+          <div class="col col-lg-2 padding-10">
+            <button class="col col-lg-2 close closeIconPadding" data-dismiss="modal" >×</button>
+          </div>	
+        </div>
+
+				<div class="col-xs-12 col-sm-12 col-md-12">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										Groups</h3>
+								</div>
+								<div class="panel-body no-padding text-align-center">
+									<div class="col-xs-6 col-sm-6 col-md-6">
+											<label class="input pull-left"><br/>
+														<input type="checkbox" class="checkbox {{styleTheme}}" id="select_all_groups" (click)="checkAll($event)">
+														<span>Select All</span>
+													</label>
+									</div>
+									<div class="input pull-right padding-10 col-xs-6 col-sm-6 col-md-6">
+										<div class="input-group">
+											<input class="form-control" placeholder="Search Group" type="text">
+											<div class="input-group-btn">
+												<button class="form-control btn btn-primary btn-sm" type="button">
+                                        <i class="fa fa-search"></i> Search
+                                      </button>
+											</div>
+										</div>
+									</div>
+									<table class="table table-responsive">
+										<tbody>
+											<tr>
+												<td>
+													<label class="input pull-left"> 
+															<input type="checkbox"  value="Y" class="groupcheckbox checkbox {{styleTheme}}"  name="check[]">
+															<span>Liabilities</span>
+														</label>
+												</td>
+												<td>
+													<label class="input pull-left">
+						                                <input type="checkbox" value="Y" class="groupcheckbox checkbox {{styleTheme}}" name="check[]">
+                                            <span>Assets</span>
+                                          </label>
+												</td>
+												<td>
+													<label class="input pull-left">
+						                                <input type="checkbox" value="Y" class="groupcheckbox checkbox {{styleTheme}}" name="check[]">
+                                            <span>Income</span>
+                                          </label>
+												</td>
+												<td>
+													<label class="input pull-left">
+						                                <input type="checkbox" value="Y" class="groupcheckbox checkbox {{styleTheme}}" name="check[]">
+                                            <span>Expenses</span>
+                                          </label>
+												</td>
+												<td>
+													<label class="input pull-left">
+						                                <input type="checkbox" value="Y" class="groupcheckbox checkbox {{styleTheme}}" name="check[]">
+                                            <span>Capital Account</span>
+                                          </label>
+												</td>
+												<td>
+													<label class="input pull-left">
+						                                <input type="checkbox" value="Y" class="groupcheckbox checkbox {{styleTheme}}" name="check[]">
+                                            <span>Current Liabilities & Provisions</span>
+                                          </label>
+												</td>
+											</tr>
+											
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+							
+						</div>
+						<footer class="text-right padding-10 modal-footer">
+								<button type="button"  class="btn btn-info btn-sm">
+										Import
+								</button>
+								<button type="button" class="btn btn-warning" data-dismiss="modal" >
+									Close
+								</button>
+							</footer>
+      </div>
+    </div>
+  </div>
+	<style type="text/css">
+    .pagination>li>button {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        line-height: 1.42857143;
+        text-decoration: none;
+        color: #3276b1;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        margin-left: -1px;
+    }
+
+    .pagination>li>button:hover {
+        z-index: 2;
+        color: #214e75;
+        background-color: #eee;
+        border-color: #ddd;
+    }
+
+    .pagination>.disabled>button,
+    .pagination>.disabled>button:focus,
+    .pagination>.disabled>button:hover {
+        color: #999;
+        background-color: #fff;
+        border-color: #ddd;
+        cursor: not-allowed;
+    }
+
+     .FormTopBox {
+        border: 1px solid #ccc;
+        margin: 0 0 5px;
+        padding: 5px;
+        position: relative;
+    }
+
+    .qulMod {
+        background: #33414E;
+        color: #fff;
+    }
+</style>

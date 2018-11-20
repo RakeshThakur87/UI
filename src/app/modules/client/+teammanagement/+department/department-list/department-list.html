@@ -1,0 +1,53 @@
+<nb-card>
+        <nb-card-header class="text-center">
+            <div class="row back-buttons">
+                <div class="col-sm-10">
+                    <h4 class="title"><i class="fa fa-align-justify">&nbsp;&nbsp; Industry Details</i></h4>
+                </div>
+                <div class="col-sm-2">
+                    <a routerLink="/client/industry-creation" class="btn btn-block btn-outline-success active">
+                        <i class="fa fa-plus"></i> Add New</a>
+                </div>
+            </div>
+        </nb-card-header>
+        <nb-card-body>
+            <div id="content" class="capitalize">           
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Code</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let item of ListObj let itemIndex = index">
+                                    <tr>
+                                        <td>{{item.Name}}</td>
+                                        <td>{{item.IndustryCode}}</td>
+                                        <td>{{item.Status}}</td>
+                                        <td>
+                                            <a (click)="onedit(item)">
+                                                <span class="padding-5 fa fa-edit cursor-pointer btn-color-edit"></span>
+                                            </a>&nbsp;&nbsp;
+    
+                                            <a placement="bottom" (click)="ondelete()" ngbTooltip="Tooltip on bottom">
+                                                <span class="padding-5 fa fa-trash cursor-pointer btn-color-delete"></span>
+                                            </a>
+    
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+    
+                <!--/.col-->
+            </div>
+            <!-- </div> -->
+        </nb-card-body>
+    </nb-card>

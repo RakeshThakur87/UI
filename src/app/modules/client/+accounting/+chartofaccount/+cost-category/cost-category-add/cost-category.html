@@ -1,0 +1,72 @@
+<div class="pre-loader" *ngIf="apiResponsesLoderFlag.length > 0">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="fa fa-edit fa-fw "></i> Charts Of Account
+                <span>&gt;Cost Category</span>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="widget-body panel panel-default">
+            <form id="cityCreationForm" class="smart-form" novalidate="novalidate" [saBootstrapValidator]="validatorOptions">
+                <fieldset class="padding-10">
+                    <header><span *ngIf="submit">Creation</span><span *ngIf="update">Updation</span>
+                        <div class="col-sm-2 pull-right text-right">
+                            <a *ngIf="routingFrom !='modal'" routerLink="/chartsofaccount/cost-category" class="btn-sm btn-info">
+                                <i class="fa fa-backward"></i> Back to listing
+                            </a>
+                        </div>
+                    </header>
+                    <div class="padding-top-10 row">
+                        <div *ngIf="success" class="alert alert-success alert-custom">
+                            <button class="close" (click)="removeMessage()" data-dismiss="alert">×</button>
+                            <div>{{success}}</div>
+                        </div>
+                        <div *ngIf="error" class="alert alert-danger alert-custom">
+                            <button class="close" (click)="removeMessage()" data-dismiss="alert">×</button>
+                            <div>{{error}}</div>
+                        </div>
+                    </div>
+                    <fieldset>
+                        <div class="col-lg-12">
+                            <section class="col col-4 ">
+                                <label class="label"><span>Cost Category Name</span><sup style="color:red;">*</sup></label>
+                                <label class="input costcategoryname">
+                                <input class="form-control" id="costcategory" type="text" placeholder="Cost Category Name" [(ngModel)]="elements.cost_category_name" cost_category_name="ngModel" name="costcategoryname">
+                            </label>
+                            </section>
+                            <section class="col col-4 costcategorycompany">
+                                <label class="label"><span >Company</span><sup style="color:red;">*</sup></label>
+                                <label class="input">
+                                    <select class="form-control" style="padding-right: 2px;" [(ngModel)]="elements.company_uuid"  company_uuid="ngModel" name="costcategorycompany">
+                                        <option [ngValue]="selectCompany" disabled selected>Select Parent Company</option>
+                                        <option *ngFor="let company of companylist;" value="{{company.company_uuid}}">{{company.company_short_name}}</option>
+                                    </select>
+                                </label>
+                            </section> 
+                            <section class="col col-4">
+                                <label class="label">Status</label>
+                                <label class="input">
+                                <select class="form-control drop-down" [(ngModel)]="elements.status" status="ngModel" name="status">  
+                                    <option  value="1" selected>Active</option>
+                                    <option  value="0">In-Active</option>                           
+                                    </select>  
+                                </label>
+                            </section>  
+                        </div>
+                    </fieldset>
+                    <footer>
+                        <section align="right">
+                            <button class="btn btn-success btn-sm submit" submitValidation="submit" [saBootstrapValidator]="validatorOptions" type="submit" (click)="onSubmit()"><i class="fa fa-save"></i><span *ngIf="submit">Save</span><span *ngIf="update">Update</span></button>
+                            <button *ngIf="submit" class="btn btn-warning" type="reset"><i class="fa fa-refresh"></i><span>Reset</span></button>
+                            </section>
+                        </footer>
+                    </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

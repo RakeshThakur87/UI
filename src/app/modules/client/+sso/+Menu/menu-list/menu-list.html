@@ -1,0 +1,151 @@
+<div class="pre-loader" *ngIf="apiResponsesLoderFlag.length>0">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+
+<div id="content" class="capitalize">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>Role Master Detail
+                    <div class="card-header-actions">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button type="button" class="btn btn-lg btn-block btn-success" (click)="applied()"><i
+                                        class="fa fa-thumbs-up"></i>
+                                    Role Mapping</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div style="margin:5px !important;" class="row">
+                        <div class="col-sm-8 k-pager-sizes">
+                            <!-- <div style="margin-bottom: -1px;" class="k-pager-sizes"> -->
+                            <!-- <div class="col-sm-4"> -->
+                            <form class="paging">
+                                <select data-role="dropdownlist" class="form-control dropdown">
+                                    <option value="10">10</option>
+                                    <option value="15" selected="selected">15</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                <label> items per page</label></form>
+                            <!-- <div class="col-sm-8"><span style="text-align: left;"> items per page</span></div> -->
+                            <!-- </div> -->
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- <input type="text" name="SearchString" ([ngModel])="elements.SearchString" class="form-control dropdown">
+                            <button type="button" class="btn btn-lg btn-block btn-primary" (click)="getPoDetail(1)">search</button> -->
+                            <form class="search">
+                                <input type="text" placeholder="Search.." name="SearchString" ([ngModel])="elements.SearchString">
+                                <button type="submit" (click)="getPoDetail(1)"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div style="margin-top:20px;" class="row margin-top-20px">
+                        <div class="col-sm-12">
+                            <table class="table table-responsive-sm table-hover table-outline mb-0">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>
+                                        </th>
+                                        <th>Industry Name</th>
+                                        <th>Module Name</th>
+                                        <th>Parent Menu</th>
+                                        <th>Menu Name</th>                                        
+                                        <th>Path</th>
+                                        <th>Icon</th>
+                                        <th>Order No</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let item of itemListObj let itemIndex = index">
+                                        <tr>
+                                            <td>
+                                                {{item.SrNo}}
+                                            </td>
+                                            <td>{{item.IndustryName}}</td>
+                                            <td>{{item.ModuleName}}</td>
+                                            <td>{{item.ParentMenu}}</td>
+                                            <td>{{item.MenuName}}</td>
+                                            <td>{{item.Path}}</td>
+                                            <td>{{item.Icon}}</td>
+                                            <td>{{item.MenuOrder}}</td>
+                                            <td>{{item.ActiveStatus}}</td>
+                                            <td></td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                            <div class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
+                                <div class="k-pager-info k-label">
+                                    {{ pager_info }}
+                                </div>
+                                <ul *ngIf="pager.totalPages && pager.totalPages > 0" class="pagination k-pager-numbers k-reset">
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <button type="button" [disabled]="prvflag" (click)="setPage(1)"> <span class="fa fa-step-backward"></span></button>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                        <button type="button" [disabled]="prvflag" (click)="setPage(pager.currentPage - 1)"><span
+                                                class="fa fa-backward"></span></button>
+                                    </li>
+                                    <li *ngFor="let page of pag.pages" [ngClass]="{active:pager.currentPage === page}">
+                                        <!-- <a (click)="setPage(page)">{{page}}</a> -->
+                                        <button type="button" (click)="setPage(page)">{{page}}</button>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+                                        <button type="button" [disabled]="nextflag" (click)="setPage(pager.currentPage + 1)"><span
+                                                class="fa fa-forward"></span></button>
+                                    </li>
+                                    <li [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+                                        <button type="button" [disabled]="nextflag" (click)="setPage(pager.totalPages)"><span
+                                                class="fa fa-step-forward"></span></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+                <br />
+                <h4 class="modal-title">Reject Reason</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="row custom-grid">
+                            <div class="col-sm-4 custom-grid-input-label-outer">
+                                <div class="custom-grid-input-label-inner">
+                                    Remarks
+                                </div>
+                            </div>
+                            <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                <div class="custom-grid-input-label-inner">
+                                    <input type="text" name="remarks" ([ngModel])="elements.remarks" class="form-control dropdown">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="submit()">Confim</button>
+                    <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>

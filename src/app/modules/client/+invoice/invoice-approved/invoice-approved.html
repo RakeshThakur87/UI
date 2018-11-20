@@ -1,0 +1,160 @@
+<div class="pre-loader" *ngIf="apiResponsesLoderFlag.length>0">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+</div>
+
+<div id="content" class="capitalize">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>Forward To Next Level Bills Detail
+                    <div class="card-header-actions">
+
+                        <div class=" row back-buttons">
+                                <div class="col-sm-12">
+                                        <button type="button" class="btn btn-lg btn-block btn-primary" (click)="applied()"><i class="fa fa-plus"></i>
+                                            Forward</button>
+        
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-responsive-sm table-hover table-outline mb-0">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>
+                                        </th>
+                                        <th>Area Office</th>
+                                        <th>Job/Contract No</th>
+                                        <th>PO Date</th>
+                                        <th>PO No</th>
+                                        <th>PO Type</th>
+                                        <th>Department</th>
+                                        <th>Supervisor</th>                                        
+                                        <th>Total Amount</th>
+                                        <th>Billed Amount</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let item of poListObj let itemIndex = index">
+                                        <tr>
+                                            <td>
+                                                <button class="btn btn-primary" (click)="openCloseRow(item.ID)">
+                                                    <span *ngIf="rowSelected!=item.ID; else close">Open</span>
+                                                    <ng-template #close>
+                                                        <span>Close</span>
+                                                    </ng-template>
+                                                </button>
+                                                <input type="checkbox" (change)="rejectionChange(item.ID)"  ([ngModel])="elements.rejected" title="Rejected">                                           
+                                            </td>
+                                            <td>{{item.BranchName}}</td>
+                                            <td>{{item.JobOrderNo}}</td>
+                                            <td>{{item.PODate}}</td>
+                                            <td>{{item.PONo}}</td>
+                                            <td>{{item.POType}}</td>
+                                            <td>{{item.ServiceType}}</td>
+                                            <td>{{item.SupervisorName}}</td>
+                                            <td>{{item.GrandTotal}}</td>
+                                            <td>{{item.BilledAmount}}</td>
+                                            <td>{{item.GrandTotal-item.BilledAmount}}</td>
+                                            
+                                        </tr>
+                                        <tr *ngIf="rowSelected==item.ID ">
+                                            <td></td>
+                                            <td colspan="10">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:5%;"></th>
+                                                            <th style="width:5%;">id</th>
+                                                            <th style="width:30%;">Product Description</th>
+                                                            <th style="width:10%;">HSNCode</th>
+                                                            <th style="width:10%;">Qty</th>
+                                                            <th style="width:10%;">Rate</th>
+                                                            <th style="width:10%;">Total</th>
+                                                            <!-- <th style="width:10%;">Billed</th>
+                                                            <th style="width:10%;">Balance</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item2 of item.PO_Detail_List let itemIndex2 = index">
+                                                            <td style="width:5%;"><input type="checkbox" name="checks{{itemIndex2}}" [(ngModel)]="item2.isselected" (change)="productChange(item2,itemIndex2,item2.isselected)"></td>
+                                                            <td style="width:5%;">{{itemIndex2}}</td>
+                                                            <td style="width:30%;text-align:left;">{{item2.ProductName}}</td>
+                                                            <td style="width:10%;text-align:left;">{{item2.HSNCode}}</td>
+                                                            <td style="width:10%;text-align:right;">{{item2.Qty}}</td>
+                                                            <td style="width:10%;text-align:right;">{{item2.Rate}}</td>
+                                                            <td style="width:10%;text-align:right;">{{item2.TotalPrice}}</td>
+                                                            <!-- <td style="width:10%;text-align:right;">{{item2.TotalPrice}}</td>
+                                                            <td style="width:10%;text-align:right;">{{item2.TotalPrice}}</td> -->
+                                                        </tr>
+                                                        <tr *ngIf="elements.productlist.length>0">
+                                                            <td colspan="4">
+                                                                <span >  <a  (click)="oninvoicechange()" class="btn btn-block btn-info active">
+                                                                    <i class="fa fa-plus"></i> create invoice</a>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+                <br/>
+                <h4 class="modal-title">Reject Reason</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <div class="row custom-grid">
+                            <div class="col-sm-4 custom-grid-input-label-outer">
+                                <div class="custom-grid-input-label-inner">
+                                    Remarks
+                                </div>
+                            </div>
+                            <div class="custom-grid-left col-sm-8 custom-grid-input-label-outer">
+                                <div class="custom-grid-input-label-inner">
+                                        <input type="text" name="remarks" ([ngModel])="elements.remarks" class="form-control dropdown">
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="submit()">Confim</button>
+                <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+
+<style>
+    /* Styles go here */
+</style>

@@ -1,0 +1,194 @@
+<div class="pre-loader" *ngIf="apiResponsesLoderFlag.length>0">
+    <img src="{{AJAX_LOADER_PIC_WITH_PATH}}" class="ajax-loader" />
+  </div>
+  <div id="content">
+    <div class="row">
+      <div class="col-xs-12 col-sm-7 col-md-7 col-lg-12">
+        <h1 class="page-title txt-color-blueDark">
+          <i class="fa fa-edit fa-fw "></i> Chart Of Accounts
+          <span>&gt; Ledger</span>
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div *ngIf="showAssociation" class="widget-body panel panel-default">
+          <app-branch-association (emitLedgerCreationMOdal)="ledgerCreationModalEmit()" [routingFrom]="routingFrom == 'ledgermodal' ? routingFrom : ''" 
+          [companyUuid]="elements.company_uuid" [uuid]="uuid" [url]="url" [navigateURL]="navigateURL"></app-branch-association>
+        </div>
+        <div *ngIf="!showAssociation  || (!isSubmittedAddressData && !isSubmittedRegData)" class="widget-body panel panel-default">
+            <div *ngIf="successMessage.length>0" class="alert alert-success alert-custom">
+                <button class="close" data-dismiss="alert">	× </button>
+                <div [hidden]="successMessage.length ==0">{{successMessage}}</div>
+              </div>
+          <div *ngIf="errorMessage.length>0 || groupLedgerErrorMessage.length>0" 
+            class="alert alert-danger alert-block">
+            <button class="close" (click)="resetErrors()">	× </button>
+            <div [hidden]="errorMessage.length ==0">{{errorMessage}}</div>
+            <div [hidden]="groupLedgerErrorMessage.length ==0">{{groupLedgerErrorMessage}}</div>
+          </div>
+          <fieldset class="padding-10">
+            <header><span *ngIf="isAdd">Creation</span><span *ngIf="!isAdd">Updation</span>
+              <div class="col-sm-2 pull-right text-right">
+                <a *ngIf="routingFrom !='ledgerModal'" routerLink="{{listingLink}}" class="btn-sm btn-info">
+                  <i class="fa fa-backward"></i> Back to listing
+                </a>
+              </div>
+            </header>
+          </fieldset>
+          <form id="ledgerCreationForm" [saBootstrapValidator]="validatorOptions">
+            <div class="row">
+              <div class="col-sm-4">
+                <label>Company</label>
+                <sup style="color:red;">*</sup>
+                <div class="select company">
+                  <select class="form-control" (change)="onCompanyChange();" [(ngModel)]="elements.company_uuid" name="company" >
+                    <option *ngFor="let company of companylist;" value="{{company.company_uuid}}">{{company.company_short_name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                  <label>Group Ledger</label>
+                  <sup style="color:red;">*</sup>
+                  <div class="select">
+                    <cra-select componentId="ledgerCreationGroupLedger" [(ngModel)]="elements.group_ledger_uuid" name="groupLedger" [items]="groupLedgers"
+                      [searchData]="groupLedgers" idField="group_ledger_uuid" textField="group_ledger_name" childrenField="group_ledger_hierarchy">
+                    </cra-select>
+                  </div>
+                </div>
+              <div class="col-sm-4">
+                <label>Ledger Name</label>
+                <sup style="color:red;">*</sup>
+                <div class="ledger_name">       
+                  <input class="form-control" id="ledgerName" type="text" placeholder="Enter Ledger Name" [(ngModel)]="elements.ledger_name" name="ledger_name">
+                </div>
+              </div>
+            </div>
+            <div class="row margin-top-10px" style="min-height: 56px;">
+              <div class="col-sm-4">
+                <div class="col-sm-1 padding-left-right-zero">
+                  <div class="inline-group">
+                  <label style="width:70px;">
+                    <input id="category" class="checkbox" style="visibility:visible; position:absolute; top:1px; cursor:pointer;" 
+                      type="checkbox" [(ngModel)]="elements.is_costcenter_required" 
+                      is_costcenter_required="ngModel" name="is_category_required">
+                  </label>
+                </div>
+                </div>
+                <div class="col-sm-10" style="height: 23px;">
+                  <label class="label" for="category">Cost Center Category<sup *ngIf="elements.is_costcenter_required" style="color:red;">*</sup></label>
+                </div>
+                <div *ngIf="elements.is_costcenter_required" class="select">
+                  <ss-multiselect-dropdown [options]="costCenterCategories" [(ngModel)]="elements.category" name="costCentreCategory"
+                    [settings]="multiSelectSettings" [texts]="multiSelectTextSettings">
+                  </ss-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <label>Ledger Category</label>
+                <sup style="color:red;">*</sup>
+                <div class="inline-group">
+                  <label *ngFor="let ledgerType of leadgerCategories" style="width:56px;">
+                      <input type="radio" (change)="ledgerCategoryChanged(elements.ledger_type_id);" [(ngModel)]="elements.ledger_type_id" ledger_type_id="ngModel" 
+                      value={{ledgerType.ledger_type_id}}  name="ledger_type_id">
+                      {{ledgerType.ledger_type_name}}
+                  </label>
+                </div>
+              </div>
+              <div *ngIf="ledgerTypeTaxSelected" class="col-sm-4">
+                <label>Select Type of Tax</label>
+                <sup style="color:red;">*</sup>
+                <div class="inline-group">
+                  <label *ngFor="let taxType of taxTypes" style="width:70px;">
+                    <input type="radio" [(ngModel)]="elements.type_of_tax_uuid" type_of_tax_uuid="ngModel"  value="{{taxType.tax_type_uuid}}"  name="tax_type_uuid">
+                    {{taxType.tax_type_name}}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row margin-top-10px margin-bott0m-10px" >            
+              <div class="col-sm-4">
+                  <label>Ledger Code</label>    
+                  <input class="form-control" [disabled]="!ledgercode" id="ledgerCode" placeholder="Enter Ledger Code" type="text" 
+                    [(ngModel)]="elements.ledger_code" name="ledger_code">
+                </div>
+              <div class="col-sm-4">
+                <label>Status</label>
+                <sup style="color:red;">*</sup>
+                <div class="select status_id">
+                  <select class="form-control drop-down"  [(ngModel)]="elements.status" status="ngModel" name="status" >                       
+                    <option value="1" (selected)="selected">Active</option>
+                    <option value="0">In-Active</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4"  style="min-height: 56px;" *ngIf="ledgerTypeOtherSelected">
+                <div class="row">
+                  <div style="padding-left:0px; padding-right:0px;" class="col-sm-5">
+                    <label class="input">
+                      <input type="checkbox" class="checkbox" [(ngModel)]="elements.is_for_tax" is_for_tax="ngModel" name="is_for_tax">
+                      <span>Is Tax Applicable</span>
+                    </label>
+                  </div>
+                  <div class="col-sm-7">
+                    <label class="input">
+                      <input type="checkbox" class="checkbox" [(ngModel)]="elements.is_bill_detail_required" is_bill_detail_required="ngModel" name="is_bill_detail_required">
+                      <span>Is Bill Detail Required</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <section class="col col-lg-12">
+                <ul class="nav nav-tabs in my-tab" id="myTab">
+                  <li class="active">
+                    <a data-toggle="tab" href="#address"><i class="fa fa-map-marker" ></i> <span
+                    class="hidden-mobile hidden-tablet">Address</span></a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#register"><i class="fa fa-files-o" ></i> <span
+                      class="hidden-mobile hidden-tablet">Registration</span></a>
+                  </li>
+                  <li>
+                    <a data-toggle="tab" href="#employee"><i class="fa fa-files-o" ></i> <span
+                      class="hidden-mobile hidden-tablet">Employee Details</span></a>
+                  </li>
+                </ul>
+              </section>
+            </div>
+            <div class="no-padding">
+              <div class="widget-body">
+                <div id="myTabContent" class="tab-content">
+                  <app-address (loaderOutput)="loaderOutput($event)" (submitAddress)="submitAddressResponse($event)" [submitAddressData]="addressParams" class="tab-pane fade active in padding-10 no-padding-bottom" id="address"></app-address>
+                  <app-registration (loaderOutput)="loaderOutput($event)" (submitRegistration)="submitRegistrationResponse($event)" [submitRegistrationData]="registrationParams" class="tab-pane fade padding-10 no-padding-bottom" id="register"></app-registration>
+                  <app-employeedetails (loaderOutput)="loaderOutput($event)" (submitEmployeeDetails)="submitEmployeeResponse($event)" [submitEmployeeData]="employeeParams" class="tab-pane fade padding-10 no-padding-bottom" id="employee"></app-employeedetails>
+                </div>
+                <div class="save-buttons-div">
+                  <div class="col-sm-7"></div>
+                  <div class="col-sm-5">
+                    <!--<button *ngIf="isAdd && routingFrom != 'ledgerModal'" class="btn btn-primary btn-sm submit" submitValidation="submit" [saBootstrapValidator]="validatorOptions"
+                      type="submit" (click)="submitLedgerForm('new')" [disabled]="!elements.enable">
+                      <span *ngIf="spinnerEnable" class="fa fa-spinner fa-spin ng-hide"></span>
+                      <i class="fa fa-save"></i>
+                      Save &amp; New 
+                    </button>-->
+                    <button class="btn btn-primary btn-sm submit" submitValidation="submit" [saBootstrapValidator]="validatorOptions" type="submit"
+                      (click)="submitLedgerForm('close')" [disabled]="!elements.enable">
+                      <span *ngIf="spinnerEnable" class="fa fa-spinner fa-spin ng-hide"></span>
+                      <i class="{{isAdd ?'fa fa-save' :'glyphicon glyphicon-edit cursor-pointer'}}"></i>
+                      {{ isAdd ==true? (routingFrom == 'ledgerModal' ? 'Save' : 'Save &amp; Close' ) :'Update'}}
+                    </button>
+                    <a *ngIf="routingFrom != 'ledgerModal'" routerLink="{{listingLink}}" class="btn btn-primary btn-sm submit" class="btn btn-primary btn-sm">
+                      <i class="fa fa-dot-circle-o"></i> Cancel
+                    </a>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

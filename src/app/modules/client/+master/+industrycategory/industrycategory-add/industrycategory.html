@@ -1,0 +1,80 @@
+<nb-card>
+    <nb-card-header class="text-center">
+        <h4 class="title">Client Sign up</h4>
+        <small class="form-text sub-title">
+            Create New Category
+        </small>
+    </nb-card-header>
+    <nb-card-body>
+        <form *ngIf="!isSuccess; else successMessage" [ngClass]="{ 'form-submit': isSubmit}" (ngSubmit)="onSubmit()"
+            name="addnewitemForm" [formGroup]="addnewitemForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <nb-card formGroupName="dataInfo">
+                        <nb-card-header>Category Details</nb-card-header>
+                        <nb-card-body>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="Name">Category Name</label>
+                                        <input type="text" formControlName="Name" name="Name" class="form-control" id="Name"
+                                            placeholder="First Name">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.invalid && (addnewitemForm['controls'].dataInfo['controls'].Name.dirty || addnewitemForm['controls'].dataInfo['controls'].Name.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.required">
+                                                Please enter a Category Name.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].Name.errors.maxlength">
+                                                Please enter a Category Name no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="IndustryCode">Category Code</label>
+                                        <input type="text" formControlName="IndustryCode" name="IndustryCode" class="form-control"
+                                            id="IndustryCode" placeholder="Category Code">
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.invalid && (addnewitemForm['controls'].dataInfo['controls'].IndustryCode.dirty || addnewitemForm['controls'].dataInfo['controls'].IndustryCode.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.required">
+                                                Please enter a Category Code.
+                                            </span>
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].IndustryCode.errors.maxlength">
+                                                Please enter a Category Code no more than 100 characters.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="ParentId"> Name</label>
+                                        <select formControlName="ParentId" name="ParentId" class="form-control" id="ParentId">
+                                            <option value="">Select Industry</option>
+                                            <option *ngFor="let industry of industries" [value]="industry.Id">
+                                                {{industry.Name }}</option>
+                                        </select>
+                                        <div class="invalid-feedback form-error" *ngIf="addnewitemForm['controls'].dataInfo['controls'].ParentId.invalid && (addnewitemForm['controls'].dataInfo['controls'].ParentId.dirty || addnewitemForm['controls'].userInfo['controls'].ParentId.touched || isSubmit)">
+                                            <span *ngIf="addnewitemForm['controls'].dataInfo['controls'].ParentId.errors.required">
+                                                Please select a Industry.
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+
+        </form>
+        <ng-template #successMessage>
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            <a class="btn btn-info" routerLink="/auth/login">Log In</a>
+        </ng-template>
+    </nb-card-body>
+</nb-card>
